@@ -4,12 +4,12 @@ import thunk from 'redux-thunk'
 import storage from 'redux-persist/lib/storage'
 import { persistStore, persistReducer } from 'redux-persist'
 import rootReducer from './reducers'
-import middleware from './middlewares/middleware'
+import { jwt } from './middleware'
 
 const persistConfig = {
   key: 'root',
   storage,
-  whitelist: ['auth']
+  whitelist: ['auth'],
 }
 
 const persistedReducer = persistReducer(persistConfig, rootReducer)
@@ -20,12 +20,14 @@ export default function configureStore() {
     {},
     composeWithDevTools(
       applyMiddleware(
+        // logger,
+        jwt,
         thunk,
-        middleware
-      )
-    ))
+      ),
+    ),
+  )
 
-  const  persistor = persistStore(store)
+  const persistor = persistStore(store)
 
   return { persistor, store }
 }

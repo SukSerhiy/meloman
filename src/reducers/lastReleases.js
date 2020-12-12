@@ -2,28 +2,33 @@ import { actionTypes } from '../actions/lastReleases'
 
 const defaultState = {
   loading: false,
-  data: {}
+  data: {
+    items: [],
+  },
 }
-
-console.log('actionTypes', actionTypes)
 
 export default (state = defaultState, action) => {
   switch (action.type) {
     case actionTypes.FETCH_LAST_RELEASES_REQUEST:
       return {
         ...state,
-        loading: true
+        loading: true,
       }
-    case actionTypes.FETCH_LAST_RELEASES_SUCCESS:
+    case actionTypes.FETCH_LAST_RELEASES_SUCCESS: {
+      const albums = action.data ? action.data.albums : {}
       return {
         ...state,
         loading: false,
-        data: action.data
+        data: {
+          ...albums,
+          items: [...state.data.items, ...albums.items],
+        },
       }
+    }
     case actionTypes.FETCH_LAST_RELEASES_ERROR:
       return {
         ...state,
-        loading: false
+        loading: false,
       }
     default:
       return state

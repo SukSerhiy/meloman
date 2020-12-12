@@ -1,0 +1,5 @@
+export const TRACK_STATUSES = {
+  PLAYING: 'PLAYING',
+  PAUSED: 'PAUSED',
+  COMPLETED: 'COMPLETED',
+}

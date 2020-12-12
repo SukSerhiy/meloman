@@ -1,20 +1,31 @@
 import { getApi } from '../config'
-import { setLoading, setError } from './global' 
 
 export const actionTypes = {
-  SET_ACCESS_TOKEN: 'auth/SET_ACCESS_TOKEN'
+  TOKEN_REFRESHING: 'auth/TOKEN_REFRESHING',
+  TOKEN_REFRESHED: 'auth/TOKEN_REFRESHED',
 }
 
-const setAccessToken = token => ({
-  type: actionTypes.SET_ACCESS_TOKEN,
-  token
+const setAuthData = (params) => ({
+  type: actionTypes.TOKEN_REFRESHED,
+  ...params,
 })
 
-export const refreshToken = () => dispatch => {
-  getApi().refreshToken().then(resp => {
-    const { data: { access_token } } = resp
-    dispatch(setAccessToken(access_token))
-  })
-  .catch(err => {
+export const refreshToken = () => (dispatch) => {
+  dispatch({ type: actionTypes.TOKEN_REFRESHING })
+  const api = getApi()
+  return api.refreshToken().then((resp) => {
+    const {
+      data: {
+        access_token: accessToken,
+        expires_in: expiresIn,
+        token_type: tokenType,
+      },
+    } = resp
+    dispatch(setAuthData({
+      accessToken,
+      expiresIn,
+      tokenType,
+    }))
+    api.accessToken = accessToken
   })
 }

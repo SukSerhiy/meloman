@@ -1,0 +1,24 @@
+env:
+  browser: true
+  es2020: true
+extends:
+  - 'plugin:react/recommended'
+  - 'airbnb'
+parser: "babel-eslint"
+parserOptions:
+  ecmaFeatures:
+    jsx: true
+  ecmaVersion: 12
+  sourceType: module
+plugins:
+  - react
+"ignorePatterns": ["/dist/**"]
+rules: {
+  "semi": [2, "never"],
+  "react/prop-types": 0,
+  "import/no-cycle": 0,
+  "import/prefer-default-export": 0,
+  "react/jsx-filename-extension": [1, { "extensions": [".js", ".jsx"] }],
+  "react/prefer-stateless-function": 0,
+  "react/jsx-props-no-spreading": 0
+}

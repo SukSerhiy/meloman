@@ -2,7 +2,7 @@ import { actionTypes } from '../actions/global'
 
 const defaultState = {
   loading: false,
-  error: {}
+  error: {},
 }
 
 export default (state = defaultState, action) => {
@@ -10,12 +10,12 @@ export default (state = defaultState, action) => {
     case actionTypes.SET_LOADING:
       return {
         ...state,
-        loading: action.loading
+        loading: action.loading,
       }
     case actionTypes.SET_ERROR:
       return {
         ...state,
-        error: action.error
+        error: action.error,
       }
     default:
       return state
