@@ -32,6 +32,6 @@ Builds the app to the `dist` folder in a development mode.
 
 Builds the app to the `dist` folder in a development mode in the interactive watch mode.
 
-### `npm run dev`
+### `npm run build`
 
 Builds the app to the `dist` folder in a production mode. All files are minified.
