@@ -1,8 +1,14 @@
 import React, { useState } from 'react'
 import { makeStyles } from '@material-ui/core/styles'
-import { TextField } from '@material-ui/core'
+import {
+  FormControl, InputLabel, OutlinedInput, InputAdornment, IconButton,
+} from '@material-ui/core'
+import SearchIcon from '@material-ui/icons/Search'
 
-const useStyles = makeStyles({
+const useStyles = makeStyles((theme) => ({
+  margin: {
+    margin: theme.spacing(1),
+  },
   searchInput: {
     width: '100%',
     backgroundColor: '#ffff',
@@ -10,25 +16,42 @@ const useStyles = makeStyles({
     borderRadius: 7,
     borderColor: '#ffff',
   },
-})
+}))
 
 const SearchInput = (props) => {
   const classes = useStyles()
   const { onSearch } = props
   const [searchStr, setSearchStr] = useState('')
   return (
-    <TextField
-      label="Search"
-      value={searchStr}
-      variant="outlined"
-      className={classes.searchInput}
-      onChange={(e) => {
-        setSearchStr(e.target.value)
-      }}
-      onBlur={() => {
-        onSearch(searchStr)
-      }}
-    />
+    <FormControl fullWidth className={classes.margin} variant="outlined">
+      <InputLabel htmlFor="search-input">Search</InputLabel>
+      <OutlinedInput
+        id="search-input"
+        label="Search"
+        value={searchStr}
+        variant="outlined"
+        className={classes.searchInput}
+        labelWidth={60}
+        onChange={(e) => {
+          setSearchStr(e.target.value)
+        }}
+        onBlur={() => {
+          onSearch(searchStr)
+        }}
+        onKeyDown={() => {
+
+        }}
+        endAdornment={(
+          <InputAdornment position="end">
+            <IconButton
+              edge="end"
+            >
+              <SearchIcon />
+            </IconButton>
+          </InputAdornment>
+        )}
+      />
+    </FormControl>
   )
 }
 
