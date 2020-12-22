@@ -1,6 +1,7 @@
 import React, { useEffect } from 'react'
 import { useHistory } from 'react-router-dom'
 import { withStyles } from '@material-ui/core/styles'
+import clsx from 'clsx'
 import AlbumItem from '../AlbumItem'
 import ProgressWrapper from '../shared/ProgressWrapper'
 import LoadMore from '../shared/LoadMore'
@@ -9,6 +10,9 @@ const styles = {
   root: {
     padding: '1px 18% 30px',
     backgroundColor: '#e5e5e5',
+  },
+  rootLoading: {
+    height: '100%',
   },
   grid: {
     display: 'flex',
@@ -28,7 +32,7 @@ const LastReleases = (props) => {
   const {
     classes,
     fetchLastReleases,
-    loading,
+    loading: loadingProp,
     data: {
       items,
       offset,
@@ -50,9 +54,12 @@ const LastReleases = (props) => {
     }
   }, [fetchLastReleases, items.length])
   const history = useHistory()
+  const loading = loadingProp && !nextOffset
   return (
-    <div className={classes.root}>
-      <ProgressWrapper loading={loading && !nextOffset}>
+    <div className={clsx(classes.root, loading && classes.rootLoading)}>
+      <ProgressWrapper
+        loading={loading}
+      >
         <h2>Last releases</h2>
         <div className={classes.grid}>
           {items.map((item) => (
@@ -74,7 +81,7 @@ const LastReleases = (props) => {
         </div>
         {canLoadMore && (
           <LoadMore
-            loading={loading && nextOffset}
+            loading={loading}
             onClick={loadMore}
           />
         )}

@@ -30,6 +30,14 @@ export default (state = defaultState, action) => {
         ...state,
         loading: false,
       }
+    case actionTypes.CLEAR_ARTISTS: {
+      return {
+        ...state,
+        data: {
+          items: [],
+        },
+      }
+    }
     default:
       return state
   }

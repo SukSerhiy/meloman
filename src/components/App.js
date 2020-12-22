@@ -11,6 +11,7 @@ import Albums from '../containers/Albums'
 import Artists from '../containers/Artists'
 import Artist from '../containers/Artist'
 import ArtistAlbums from '../containers/ArtistAlbums'
+import RelatedArtists from '../containers/RelatedArtists'
 import Album from '../containers/Album'
 import Header from './shared/Header'
 import Menu from './shared/Menu'
@@ -35,6 +36,7 @@ class App extends Component {
             <Route path="/albums" render={(props) => <Albums {...props} />} />
             <Route path="/artists/:id" exact render={(props) => <Artist {...props} />} />
             <Route path="/artists/:id/albums" render={(props) => <ArtistAlbums {...props} />} />
+            <Route path="/artists/:id/related" render={(props) => <RelatedArtists {...props} />} />
             <Route path="/artists" component={Artists} />
           </Switch>
         </main>

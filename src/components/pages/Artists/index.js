@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import { withStyles } from '@material-ui/core/styles'
 import ProgressWrapper from '../../shared/ProgressWrapper'
 import SearchInput from '../../shared/SearchInput'
@@ -23,7 +23,9 @@ const Artists = (props) => {
     data: {
       items,
     },
+    clearArtists,
   } = props
+  useEffect(() => () => clearArtists(), [clearArtists])
   return (
     <div className={classes.root}>
       <h2>Artists</h2>

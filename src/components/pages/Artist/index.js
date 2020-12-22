@@ -1,8 +1,7 @@
 import React, { useEffect, useState } from 'react'
-import { useParams, Link } from 'react-router-dom'
+import { useParams, useHistory, Link } from 'react-router-dom'
 import { makeStyles } from '@material-ui/core/styles'
 import { Button } from '@material-ui/core'
-
 import Slider from 'react-slick'
 import TracksGroup from '../../shared/TracksGroup'
 import GenreTags from '../../shared/GenreTags'
@@ -70,7 +69,7 @@ const Artist = (props) => {
     albums,
     relatedArtists,
   } = props
-  console.log('relatedArtists', relatedArtists)
+  const history = useHistory()
   useEffect(() => {
     fetchTopTracks(id)
     fetchArtistAlbums(id)
@@ -94,7 +93,7 @@ const Artist = (props) => {
           maxHeight: tracksExpanded ? 'unset' : 500,
         }}
       >
-        <SectionTitle title="Top tracks" />
+        <SectionTitle title="Top tracks" isShowAllBtn={false} />
         <TracksGroup
           tracks={topTracks}
           album={topTracks[0] && topTracks[0].album}
@@ -106,44 +105,35 @@ const Artist = (props) => {
       <section id="albumsSection">
         <SectionTitle
           title="Albums"
-          onShowAllClick={() => window.open(`${window.location.origin}/artists/${id}/albums`)}
+          onShowAllClick={() => history.push(`/artists/${id}/albums`)}
         />
         <Slider {...sliderProps}>
           {albums.map((album) => (
-            <div key={album.id}>
-              <Link
-                target="__blank"
-                to={`/albums/${album.id}`}
-              >
-                <AlbumItem
-                  key={album.id}
-                  item={album}
-                />
-              </Link>
-            </div>
+            <AlbumItem
+              key={album.id}
+              item={album}
+              onClick={() => history.push(`/albums/${album.id}`)}
+            />
           ))}
         </Slider>
       </section>
       <section id="relatedArtists">
-        <SectionTitle title="Related Artists" />
+        <SectionTitle
+          title="Related Artists"
+          onShowAllClick={() => history.push(`/artists/${id}/related`)}
+        />
         <Slider {...sliderProps}>
           {relatedArtists.map((_artist) => (
-            <div key={_artist.id}>
-              <Link
-                target="__blank"
-                to={`/artists/${_artist.id}`}
-              >
-                <HoverableGridItem
-                  classes={{
-                    root: classes.relatedArtist,
-                    cover: classes.relatedArtist,
-                  }}
-                  key={_artist.id}
-                  imageUrl={_artist.images[0]?.url}
-                  title={_artist.name}
-                />
-              </Link>
-            </div>
+            <HoverableGridItem
+              classes={{
+                root: classes.relatedArtist,
+                cover: classes.relatedArtist,
+              }}
+              key={_artist.id}
+              onClick={() => history.push(`/artists/${_artist.id}`)}
+              imageUrl={_artist.images[0]?.url}
+              title={_artist.name}
+            />
           ))}
         </Slider>
       </section>

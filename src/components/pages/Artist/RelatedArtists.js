@@ -1,11 +1,8 @@
 import React, { useEffect } from 'react'
 import { useParams, useHistory } from 'react-router-dom'
 import { makeStyles } from '@material-ui/core/styles'
-import Pagination from '@material-ui/lab/Pagination'
-import AlbumItem from '../../AlbumItem'
+import HoverableGridItem from '../../shared/HoverableGridItem'
 import PageWrapper from './PageWrapper'
-
-const LIMIT = 50
 
 const useStyles = makeStyles({
   root: {
@@ -66,53 +63,33 @@ const Artist = (props) => {
   const classes = useStyles()
   const { id } = useParams()
   const {
-    fetchArtistAlbums,
-    albums: {
-      items,
-      previous,
-      next,
-      offset,
-      total,
-    },
+    fetchRelatedArtists,
+    relatedArtists,
   } = props
   const history = useHistory()
   useEffect(() => {
-    fetchArtistAlbums(id, 0, LIMIT)
+    fetchRelatedArtists(id)
   }, [
-    fetchArtistAlbums,
+    fetchRelatedArtists,
     id,
   ])
-
-  const onPageChanged = (e) => {
-    const newPage = e.target.innerText
-    const newOffset = (newPage - 1) * LIMIT
-    fetchArtistAlbums(id, newOffset, LIMIT)
-  }
 
   return (
     <PageWrapper imageToBackground {...props}>
       <div className={classes.grid}>
-        {items.map((album) => (
-          <AlbumItem
-            key={album.id}
-            item={album}
-            onClick={() => history.push(`/albums/${album.id}`)}
+        {relatedArtists.map((_artist) => (
+          <HoverableGridItem
+            classes={{
+              root: classes.relatedArtist,
+              cover: classes.relatedArtist,
+            }}
+            key={_artist.id}
+            imageUrl={_artist.images[0]?.url}
+            title={_artist.name}
+            onClick={() => history.push(`/artists/${_artist.id}`)}
           />
         ))}
       </div>
-      <section className={classes.paginationSection}>
-        {(next || previous) && (
-          <Pagination
-            size="large"
-            classes={{
-              root: classes.pagination,
-            }}
-            count={Math.ceil(total / LIMIT)}
-            page={offset / LIMIT + 1}
-            onClick={onPageChanged}
-          />
-        )}
-      </section>
     </PageWrapper>
   )
 }

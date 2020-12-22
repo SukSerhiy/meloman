@@ -8,6 +8,10 @@ const useStyles = makeStyles({
     justifyContent: 'space-between',
     alignItems: 'center',
   },
+  showAll: {
+    fontWeight: 'bold',
+    fontSize: 17,
+  },
 })
 
 const SectionTitle = (props) => {
@@ -22,7 +26,7 @@ const SectionTitle = (props) => {
     <div className={classes.root}>
       <h2>{title}</h2>
       {isShowAllBtn && (
-        <ButtonBase onClick={onShowAllClick}>
+        <ButtonBase className={classes.showAll} onClick={onShowAllClick}>
           <span>{showAllBtnText}</span>
         </ButtonBase>
       )}

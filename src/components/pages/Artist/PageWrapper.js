@@ -42,9 +42,14 @@ const PageWrapper = (props) => {
     artist,
     fetchArtist,
     children,
+    imageToBackground = false,
   } = props
   const { id } = useParams()
   const imageUrl = artist.images && artist.images[0]?.url
+  const imageStyles = imageToBackground ? {
+    position: 'absolute',
+    opacity: 0.3,
+  } : {}
   useEffect(() => {
     if (!loading && artist.data?.id !== id) {
       fetchArtist(id)
@@ -63,7 +68,7 @@ const PageWrapper = (props) => {
       <ProgressWrapper loading={loading}>
         <div className={classes.content}>
           <section className={classes.contentTitle}>
-            <img src={imageUrl} alt="artist" />
+            <img src={imageUrl} alt="artist" style={imageStyles} />
             <h2 className={classes.title}>{artist.name}</h2>
           </section>
           {children}

@@ -1,5 +1,5 @@
 import { connect } from 'react-redux'
-import { fetchArtists } from '../actions/artists'
+import { fetchArtists, clearArtists } from '../actions/artists'
 import Artists from '../components/pages/Artists'
 
 const mapStateToProps = (state) => ({
@@ -9,6 +9,7 @@ const mapStateToProps = (state) => ({
 
 const mapDispatchToProps = (dispatch) => ({
   fetchArtists: (searchStr) => dispatch(fetchArtists(searchStr)),
+  clearArtists: () => dispatch(clearArtists()),
 })
 
 export default connect(mapStateToProps, mapDispatchToProps)(Artists)
