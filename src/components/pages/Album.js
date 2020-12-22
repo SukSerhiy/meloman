@@ -8,7 +8,6 @@ const useStyles = makeStyles({
   root: {
     padding: '20px 16%',
     backgroundColor: '#e5e5e5',
-    height: '100%',
     overflow: 'auto',
   },
   artist: {

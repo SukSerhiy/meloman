@@ -8,7 +8,7 @@ const styles = {
   root: {
     padding: '1px 18% 30px',
     backgroundColor: '#e5e5e5',
-    minHeight: 'calc(100% - 140px)',
+    minHeight: '100%',
   },
   artistsList: {
     marginTop: 20,

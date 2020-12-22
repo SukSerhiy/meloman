@@ -17,7 +17,7 @@ import Menu from './shared/Menu'
 
 const styles = {
   main: {
-    height: 'calc(100% - 60px)',
+    height: 'calc(100% - 200px)',
   },
 }
 

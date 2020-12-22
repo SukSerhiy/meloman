@@ -38,8 +38,10 @@ const SearchInput = (props) => {
         onBlur={() => {
           onSearch(searchStr)
         }}
-        onKeyDown={() => {
-
+        onKeyDown={(e) => {
+          if (e.key === 'Enter') {
+            onSearch(searchStr)
+          }
         }}
         endAdornment={(
           <InputAdornment position="end">
