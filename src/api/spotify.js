@@ -1,16 +1,17 @@
+/* eslint-disable no-underscore-dangle */
 import axios from 'axios'
 
 class Api {
   constructor({
     apiHost,
     authApiHost,
-    accessToken: _accessToken,
-    refreshToken: _refreshToken,
-    clientKey: _clientKey,
+    accessToken,
+    refreshToken,
+    clientKey,
   }) {
-    this.accessToken = _accessToken
-    this.refreshToken = _refreshToken
-    this.clientKey = _clientKey
+    this.accessToken = accessToken
+    this._refreshToken = refreshToken
+    this.clientKey = clientKey
 
     this.axios = axios.create({
       baseURL: apiHost,
@@ -21,14 +22,15 @@ class Api {
     })
   }
 
-  set accessToken(_accessToken) {
-    this.accessToken = _accessToken
-  }
+  // set accessToken(_accessToken) {
+  //   debugger
+  //   this.accessToken = _accessToken
+  // }
 
   async refreshToken() {
     const body = new URLSearchParams()
     body.append('grant_type', 'refresh_token')
-    body.append('refresh_token', this.refreshToken)
+    body.append('refresh_token', this._refreshToken)
     return this.axiosAuth
       .post(
         '/api/token', body, {

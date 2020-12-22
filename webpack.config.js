@@ -1,6 +1,5 @@
 const path = require('path')
-const webpack = require('webpack')
-const dotenv = require('dotenv')
+const Dotenv = require('dotenv-webpack')
 const HtmlWebpackPlugin = require('html-webpack-plugin')
 const { CleanWebpackPlugin } = require('clean-webpack-plugin')
 
@@ -43,10 +42,11 @@ module.exports = {
       template: './src/index.html',
       filename: 'index.html',
     }),
-    new webpack.DefinePlugin({
-      'process.env': JSON.stringify(dotenv.config().parsed), // it will automatically pick up key values from .env file
-    }),
     new CleanWebpackPlugin(),
+    new Dotenv({
+      path: './.env',
+      systemvars: true,
+    }),
   ],
   devServer: {
     contentBase: path.join(__dirname, 'dist'),
@@ -56,4 +56,5 @@ module.exports = {
     progress: true,
     open: true,
   },
+  devtool: 'source-map',
 }

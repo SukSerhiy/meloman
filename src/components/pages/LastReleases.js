@@ -9,6 +9,7 @@ const styles = {
   root: {
     padding: '1px 18% 30px',
     backgroundColor: '#e5e5e5',
+    height: 'calc(100% - 140px)',
   },
   grid: {
     display: 'flex',

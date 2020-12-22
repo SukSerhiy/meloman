@@ -3,6 +3,7 @@ import PropTypes from 'prop-types'
 import { Link } from 'react-router-dom'
 import { withStyles } from '@material-ui/core/styles'
 import { IconButton, Slider } from '@material-ui/core'
+import { Transition } from 'react-transition-group'
 import PlayImg from '../../assets/icons/play-button.svg'
 import PauseImg from '../../assets/icons/pause.svg'
 import VolumeIcon from '../../assets/icons/volume.svg'
@@ -64,11 +65,30 @@ const styles = {
   volumeBlock: {
     display: 'flex',
     alignItems: 'center',
-    backgroundColor: 'green',
+    paddingRight: 10,
+  },
+  volumeSlider: {
+    width: 0,
   },
   volumeImg: {
     height: 20,
   },
+}
+
+const DURATION = 300
+const DEFAULT_VOLUME = 0.5
+
+const defaultStyle = {
+  transition: `width ${DURATION}ms ease-in-out`,
+  width: 0,
+  opacity: 0,
+}
+
+const transitionStyles = {
+  entering: { width: 200, opacity: 1 },
+  entered: { width: 200, opacity: 1 },
+  exiting: { width: 0, opacity: 1 },
+  exited: { width: 0, opacity: 0 },
 }
 
 class Track extends Component {
@@ -77,20 +97,21 @@ class Track extends Component {
     this.audio = null
     this.state = {
       currentTime: 0,
-      muted: false,
       isVolumeShown: false,
+      prevVolume: DEFAULT_VOLUME,
+      volume: DEFAULT_VOLUME,
     }
   }
 
   componentDidMount() {
-    const { track: { track: { preview_url: previewUrl } } } = this.props
-    this.audio = new Audio(previewUrl)
-    this.audio.volume = 0.5
-    this.audio.addEventListener('timeupdate', this.onTimeUpdate)
+    const { track: { preview_url: previewUrl } } = this.props
+    const { volume } = this.state
+    this.audio = new Audio(previewUrl || undefined)
+    this.audio.volume = volume
     this.audio.addEventListener('ended', this.onEnded)
   }
 
-  componentDidUpdate(prevProps) {
+  componentDidUpdate(prevProps, prevState) {
     const { track, currentTrack } = this.props
     const prevTrack = prevProps.currentTrack
 
@@ -122,10 +143,17 @@ class Track extends Component {
         this.audio.play()
       }
     }
+
+    const { currentTime, volume } = this.state
+    if (prevState.currentTime !== currentTime) {
+      this.audio.currentTime = currentTime
+    }
+    if (prevState.volume !== volume) {
+      this.audio.volume = volume
+    }
   }
 
   componentWillUnmount() {
-    this.audio.removeEventListener('timeupdate', this.onTimeUpdate)
     this.audio.removeEventListener('ended', this.onEnded)
     this.audio.pause()
     this.audio = null
@@ -134,24 +162,28 @@ class Track extends Component {
   onEnded = () => {
     const { track, onEnd } = this.props
     this.audio.pause()
-    this.audio.currentTime = 0
+    this.setState({ currentTime: 0 })
     onEnd(track.id)
   }
 
-  onTimeUpdate = () => {
-    this.setState({ currentTime: this.audio.currentTime })
+  onTimeChange = (e, newValue) => {
+    this.setState({ currentTime: newValue })
   }
 
-  handleChange = (e, newValue) => {
-    if (newValue) {
-      this.audio.currentTime = newValue
-    }
+  onVolumeChange = (e, newValue) => {
+    this.setState({ volume: newValue })
   }
 
   changeMutted = () => {
-    this.setState((prevState) => ({
-      muted: !prevState.muted,
-    }))
+    const { prevVolume, volume } = this.state
+    if (volume === 0) {
+      this.setState({ volume: prevVolume })
+    } else {
+      this.setState({
+        prevVolume: volume,
+        volume: 0,
+      })
+    }
   }
 
   showVolume = () => {
@@ -169,10 +201,10 @@ class Track extends Component {
       currentTrack,
       onPlay,
     } = this.props
-    const { currentTime } = this.state
+    const { currentTime, volume, isVolumeShown } = this.state
+    const muted = volume === 0
     // eslint-disable-next-line react/destructuring-assignment
     const album = track.album || this.props.album
-    const { muted, isVolumeShown } = this.state
     const disabled = !track.preview_url
     const albumCover = album?.images && album.images[album.images.length - 1]?.url
 
@@ -185,6 +217,7 @@ class Track extends Component {
           }}
         >
           <IconButton
+            data-testid="play-pause-button"
             disabled={disabled}
             style={{
               opacity: disabled ? 0.5 : 1,
@@ -209,46 +242,57 @@ class Track extends Component {
             </span>
           </div>
           {this.audio
-        && track.id === currentTrack.id
-        && [
-          TRACK_STATUSES.PLAYING,
-          TRACK_STATUSES.PAUSED,
-        ].includes(currentTrack.status) && (
-          <div className={classes.sliders}>
-            <Slider
-              value={currentTime}
-              min={0}
-              step={0.1}
-              max={this.audio.duration}
-              s
-              onChange={this.handleChange}
-            />
-            <div
-              className={classes.volumeBlock}
-              onMouseEnter={this.showVolume}
-              onMouseLeave={this.hideVolume}
-            >
-              <IconButton
-                onClick={this.changeMutted}
-              >
-                <img
-                  src={muted ? MuteIcon : VolumeIcon}
-                  alt="volume"
-                  className={classes.volumeImg}
-                />
-              </IconButton>
-              {isVolumeShown && (
-                <Slider
-                  className={classes.volumeSlider}
-                  value={currentTime}
-                  min={0}
-                  step={0.1}
-                  max={this.audio.duration}
-                  onChange={this.handleChange}
-                />
-              )}
-            </div>
-          </div>
+            && track.id === currentTrack.id
+            && [
+              TRACK_STATUSES.PLAYING,
+              TRACK_STATUSES.PAUSED,
+            ].includes(currentTrack.status) && (
+              <div className={classes.sliders}>
+                <div style={{
+                  width: '100%',
+                  paddingRight: 20,
+                }}
+                >
+                  <Slider
+                    value={currentTime}
+                    min={0}
+                    step={0.1}
+                    max={this.audio.duration}
+                    onChange={this.onTimeChange}
+                  />
+                </div>
+                <div
+                  className={classes.volumeBlock}
+                  onMouseEnter={this.showVolume}
+                  onMouseLeave={this.hideVolume}
+                >
+                  <IconButton
+                    onClick={this.changeMutted}
+                  >
+                    <img
+                      src={muted ? MuteIcon : VolumeIcon}
+                      alt="volume"
+                      className={classes.volumeImg}
+                    />
+                  </IconButton>
+                  <Transition in={isVolumeShown} timeout={DURATION}>
+                    {(state) => (
+                      <Slider
+                        className={classes.volumeSlider}
+                        style={{
+                          ...defaultStyle,
+                          ...transitionStyles[state],
+                        }}
+                        value={volume}
+                        min={0}
+                        step={0.1}
+                        max={1}
+                        onChange={this.onVolumeChange}
+                      />
+                    )}
+                  </Transition>
+                </div>
+              </div>
           )}
           <div>
             <div className={classes.albumBlock}>
@@ -256,7 +300,7 @@ class Track extends Component {
                 {album.name}
               </Link>
               <span className={classes.releaseDate}>
-                {getReleaseDate(album)}
+                {album.release_date && getReleaseDate(album)}
               </span>
             </div>
           </div>
@@ -266,22 +310,13 @@ class Track extends Component {
   }
 }
 
-const albumPropType = PropTypes.shape({
-  id: PropTypes.string.isRequired,
-  name: PropTypes.string.isRequired,
-  images: PropTypes.arrayOf(
-    PropTypes.shape({
-      url: PropTypes.string,
-    }),
-  ),
-}).isRequired
-
 Track.propTypes = {
   track: PropTypes.shape({
     id: PropTypes.string.isRequired,
     name: PropTypes.string.isRequired,
-    preview_url: PropTypes.string,
-    album: albumPropType,
+    track: PropTypes.shape({
+      preview_url: PropTypes.string,
+    }),
   }).isRequired,
   currentTrack: PropTypes.shape({
     id: PropTypes.string,
@@ -289,7 +324,15 @@ Track.propTypes = {
       Object.values(TRACK_STATUSES),
     ),
   }).isRequired,
-  album: PropTypes.oneOf([albumPropType, undefined]).isRequired,
+  album: PropTypes.shape({
+    id: PropTypes.string.isRequired,
+    name: PropTypes.string.isRequired,
+    images: PropTypes.arrayOf(
+      PropTypes.shape({
+        url: PropTypes.string,
+      }),
+    ),
+  }).isRequired,
   onPlay: PropTypes.func.isRequired,
   onEnd: PropTypes.func.isRequired,
 }

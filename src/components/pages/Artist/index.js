@@ -62,7 +62,6 @@ const Artist = (props) => {
   const { id } = useParams()
   const [tracksExpanded, setTracksExpanded] = useState(false)
   const {
-    fetchArtist,
     fetchTopTracks,
     fetchArtistAlbums,
     fetchRelatedArtists,
@@ -71,13 +70,12 @@ const Artist = (props) => {
     albums,
     relatedArtists,
   } = props
+  console.log('relatedArtists', relatedArtists)
   useEffect(() => {
-    fetchArtist(id)
     fetchTopTracks(id)
     fetchArtistAlbums(id)
     fetchRelatedArtists(id)
   }, [
-    fetchArtist,
     fetchTopTracks,
     fetchArtistAlbums,
     fetchRelatedArtists,
@@ -99,6 +97,7 @@ const Artist = (props) => {
         <SectionTitle title="Top tracks" />
         <TracksGroup
           tracks={topTracks}
+          album={topTracks[0] && topTracks[0].album}
         />
       </section>
       <Button onClick={() => setTracksExpanded(!tracksExpanded)}>
@@ -139,9 +138,9 @@ const Artist = (props) => {
                     root: classes.relatedArtist,
                     cover: classes.relatedArtist,
                   }}
-                  key={artist.id}
-                  imageUrl={artist.images[0]?.url}
-                  title={artist.name}
+                  key={_artist.id}
+                  imageUrl={_artist.images[0]?.url}
+                  title={_artist.name}
                 />
               </Link>
             </div>
