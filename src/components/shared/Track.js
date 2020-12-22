@@ -108,6 +108,7 @@ class Track extends Component {
     const { volume } = this.state
     this.audio = new Audio(previewUrl || undefined)
     this.audio.volume = volume
+    this.audio.addEventListener('timeupdate', this.onTimeUpdate)
     this.audio.addEventListener('ended', this.onEnded)
   }
 
@@ -144,16 +145,14 @@ class Track extends Component {
       }
     }
 
-    const { currentTime, volume } = this.state
-    if (prevState.currentTime !== currentTime) {
-      this.audio.currentTime = currentTime
-    }
+    const { volume } = this.state
     if (prevState.volume !== volume) {
       this.audio.volume = volume
     }
   }
 
   componentWillUnmount() {
+    this.audio.removeEventListener('timeupdate', this.onTimeUpdate)
     this.audio.removeEventListener('ended', this.onEnded)
     this.audio.pause()
     this.audio = null
@@ -166,8 +165,12 @@ class Track extends Component {
     onEnd(track.id)
   }
 
-  onTimeChange = (e, newValue) => {
-    this.setState({ currentTime: newValue })
+  onTimeUpdate = () => {
+    this.setState({ currentTime: this.audio.currentTime })
+  }
+
+  setTrackTime = (e, newValue) => {
+    this.audio.currentTime = newValue
   }
 
   onVolumeChange = (e, newValue) => {
@@ -258,7 +261,7 @@ class Track extends Component {
                     min={0}
                     step={0.1}
                     max={this.audio.duration}
-                    onChange={this.onTimeChange}
+                    onChange={this.setTrackTime}
                   />
                 </div>
                 <div
