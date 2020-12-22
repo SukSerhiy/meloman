@@ -1,7 +1,9 @@
 # Meloman
 
-This is a simple pet project for searching for music. The main purpose of it is  demonstrating my developing skills. It includes only a frontend part that uses 
-an external api provided by [Spotify](https://developer.spotify.com/documentation/web-api/).This api is free for non commercial use, but it has has some restrictions, such as you can listen only 30 seconds of the track, and some tracks are not avaliable for listening.
+This is a simple pet project for searching for music. The main purpose of it is  demonstrating my developing skills. It represents a web app that uses 
+an external api provided by [Spotify](https://developer.spotify.com/documentation/web-api/).This api is free for non commercial use, but it has has some restrictions, such as you are allowed listen only 30 seconds fragment of the track, and some tracks are not avaliable for listening.
+
+It consists of home page wich represents last releases, pages for searching artists and albums and pages of specific artst or album. It also has a self made audio player for listening fragments of tracks.
 
 The project is made on [React](https://ru.reactjs.org/) using [Redux](https://redux.js.org/) as a state manager with [axios](https://github.com/axios/axios) and [redux-thunk](https://github.com/reduxjs/redux-thunk) for making api requests.
 
