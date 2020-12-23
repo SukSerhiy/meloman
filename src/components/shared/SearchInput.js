@@ -36,7 +36,9 @@ const SearchInput = (props) => {
           setSearchStr(e.target.value)
         }}
         onBlur={() => {
-          onSearch(searchStr)
+          if (searchStr) {
+            onSearch(searchStr)
+          }
         }}
         onKeyDown={(e) => {
           if (e.key === 'Enter') {
