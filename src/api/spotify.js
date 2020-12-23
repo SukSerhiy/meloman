@@ -22,11 +22,6 @@ class Api {
     })
   }
 
-  // set accessToken(_accessToken) {
-  //   debugger
-  //   this.accessToken = _accessToken
-  // }
-
   async refreshToken() {
     const body = new URLSearchParams()
     body.append('grant_type', 'refresh_token')
