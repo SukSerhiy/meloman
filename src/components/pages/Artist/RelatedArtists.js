@@ -1,10 +1,10 @@
 import React, { useEffect } from 'react'
-import { useParams, useHistory } from 'react-router-dom'
+import { useParams } from 'react-router-dom'
 import { makeStyles } from '@material-ui/core/styles'
-import HoverableGridItem from '../../shared/HoverableGridItem'
-import PageWrapper from './PageWrapper'
+import HoverableCard from '../../shared/HoverableCard'
+import PageWrapper from './ArtistLayout'
 
-const useStyles = makeStyles({
+const useStyles = makeStyles((theme) => ({
   root: {
     display: 'flex',
     flexDirection: 'column',
@@ -41,9 +41,15 @@ const useStyles = makeStyles({
     borderRadius: '50%',
   },
   grid: {
-    display: 'flex',
-    flexWrap: 'wrap',
-    minHeight: '50%',
+    display: 'grid',
+    gridGap: '50px 10%',
+    justifyItems: 'center',
+    [theme.breakpoints.up('sm')]: {
+      gridTemplateColumns: 'repeat(2, 1fr)',
+    },
+    [theme.breakpoints.up('lg')]: {
+      gridTemplateColumns: 'repeat(3, 1fr)',
+    },
   },
   paginationSection: {
     display: 'flex',
@@ -57,7 +63,7 @@ const useStyles = makeStyles({
       fontWeight: 500,
     },
   },
-})
+}))
 
 const Artist = (props) => {
   const classes = useStyles()
@@ -66,7 +72,6 @@ const Artist = (props) => {
     fetchRelatedArtists,
     relatedArtists,
   } = props
-  const history = useHistory()
   useEffect(() => {
     fetchRelatedArtists(id)
   }, [
@@ -78,15 +83,11 @@ const Artist = (props) => {
     <PageWrapper imageToBackground {...props}>
       <div className={classes.grid}>
         {relatedArtists.map((_artist) => (
-          <HoverableGridItem
-            classes={{
-              root: classes.relatedArtist,
-              cover: classes.relatedArtist,
-            }}
+          <HoverableCard
             key={_artist.id}
             imageUrl={_artist.images[0]?.url}
             title={_artist.name}
-            onClick={() => history.push(`/artists/${_artist.id}`)}
+            to={`/artists/${_artist.id}`}
           />
         ))}
       </div>

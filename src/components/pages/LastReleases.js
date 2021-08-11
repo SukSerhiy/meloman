@@ -1,91 +1,79 @@
 import React, { useEffect } from 'react'
-import { useHistory } from 'react-router-dom'
+// import { useHistory } from 'react-router-dom'
 import { withStyles } from '@material-ui/core/styles'
-import clsx from 'clsx'
 import AlbumItem from '../AlbumItem'
-import ProgressWrapper from '../shared/ProgressWrapper'
-import LoadMore from '../shared/LoadMore'
 
-const styles = {
+const styles = (theme) => ({
   root: {
-    padding: '1px 18% 30px',
-    backgroundColor: '#e5e5e5',
-  },
-  rootLoading: {
-    height: '100%',
+    padding: '0px 3%',
+    [theme.breakpoints.up('lg')]: {
+      padding: '0px 14%',
+    },
   },
   grid: {
-    display: 'flex',
-    flexWrap: 'wrap',
+    display: 'grid',
+    gridGap: '50px 10%',
+    justifyItems: 'center',
+    [theme.breakpoints.up('sm')]: {
+      gridTemplateColumns: 'repeat(2, 1fr)',
+    },
+    [theme.breakpoints.up('lg')]: {
+      gridTemplateColumns: 'repeat(3, 1fr)',
+    },
   },
-  countBlock: {
-    display: 'flex',
-    justifyContent: 'center',
-  },
-  count: {
-    fontWeight: 'bold',
-    margin: '0px 10px',
-  },
-}
+})
 
 const LastReleases = (props) => {
   const {
     classes,
     fetchLastReleases,
-    loading: loadingProp,
+    // loading: loadingProp,
     data: {
       items,
-      offset,
-      limit,
-      total,
-      next,
+      // offset,
+      // limit,
+      // total,
+      // next,
     },
   } = props
-  const canLoadMore = Boolean(next)
-  const nextOffset = offset + limit
-  const loadMore = () => {
-    if (canLoadMore) {
-      fetchLastReleases(nextOffset, limit)
-    }
-  }
+  // const canLoadMore = Boolean(next)
+  // const nextOffset = offset + limit
+  // const loadMore = () => {
+  //   if (canLoadMore) {
+  //     fetchLastReleases(nextOffset, limit)
+  //   }
+  // }
   useEffect(() => {
     if (items.length === 0) {
       fetchLastReleases()
     }
   }, [fetchLastReleases, items.length])
-  const history = useHistory()
-  const loading = loadingProp && !nextOffset
+  // const history = useHistory()
+  // const loading = loadingProp && !nextOffset
+
+  // const itemsCount = (
+  //   <div className={classes.countBlock}>
+  //     <span className={classes.count}>
+  //       {nextOffset || ''}
+  //     </span>
+  //     items out of
+  //     <span className={classes.count}>
+  //       {total}
+  //     </span>
+  //   </div>
+  // );
   return (
-    <div className={clsx(classes.root, loading && classes.rootLoading)}>
-      <ProgressWrapper
-        loading={loading}
-      >
-        <h2>Last releases</h2>
-        <div className={classes.grid}>
-          {items.map((item) => (
-            <AlbumItem
-              key={item.id}
-              item={item}
-              onClick={(id) => history.push(`/albums/${id}`)}
-            />
-          ))}
-        </div>
-        <div className={classes.countBlock}>
-          <span className={classes.count}>
-            {nextOffset || ''}
-          </span>
-          items out of
-          <span className={classes.count}>
-            {total}
-          </span>
-        </div>
-        {canLoadMore && (
-          <LoadMore
-            loading={loading}
-            onClick={loadMore}
+    <div className={classes.root}>
+      <h2>Last releases</h2>
+      <div className={classes.grid}>
+        {items.map((item) => (
+          <AlbumItem
+            key={item.id}
+            item={item}
+            to={`/albums/${item.id}`}
           />
-        )}
-      </ProgressWrapper>
+        ))}
+      </div>
     </div>
   )
 }

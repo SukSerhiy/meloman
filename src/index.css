@@ -20,6 +20,7 @@
 
 html, body, body > * {
   height: 100%;
+  /* background-color: #6b87b1; */
   color: #483b03
 }
 

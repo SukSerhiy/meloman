@@ -1,13 +1,13 @@
 import React, { useEffect } from 'react'
-import { useParams, useHistory } from 'react-router-dom'
+import { useParams } from 'react-router-dom'
 import { makeStyles } from '@material-ui/core/styles'
 import Pagination from '@material-ui/lab/Pagination'
 import AlbumItem from '../../AlbumItem'
-import PageWrapper from './PageWrapper'
+import PageWrapper from './ArtistLayout'
 
 const LIMIT = 50
 
-const useStyles = makeStyles({
+const useStyles = makeStyles((theme) => ({
   root: {
     display: 'flex',
     flexDirection: 'column',
@@ -44,9 +44,15 @@ const useStyles = makeStyles({
     borderRadius: '50%',
   },
   grid: {
-    display: 'flex',
-    flexWrap: 'wrap',
-    minHeight: '50%',
+    display: 'grid',
+    gridGap: '50px 10%',
+    justifyItems: 'center',
+    [theme.breakpoints.up('sm')]: {
+      gridTemplateColumns: 'repeat(2, 1fr)',
+    },
+    [theme.breakpoints.up('lg')]: {
+      gridTemplateColumns: 'repeat(3, 1fr)',
+    },
   },
   paginationSection: {
     display: 'flex',
@@ -60,7 +66,7 @@ const useStyles = makeStyles({
       fontWeight: 500,
     },
   },
-})
+}))
 
 const Artist = (props) => {
   const classes = useStyles()
@@ -75,7 +81,6 @@ const Artist = (props) => {
       total,
     },
   } = props
-  const history = useHistory()
   useEffect(() => {
     fetchArtistAlbums(id, 0, LIMIT)
   }, [
@@ -96,7 +101,7 @@ const Artist = (props) => {
           <AlbumItem
             key={album.id}
             item={album}
-            onClick={() => history.push(`/albums/${album.id}`)}
+            to={`/albums/${album.id}`}
           />
         ))}
       </div>

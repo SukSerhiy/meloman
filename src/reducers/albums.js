@@ -16,12 +16,12 @@ export default (state = defaultState, action) => {
       }
     case actionTypes.FETCH_ALBUMS_SUCCESS: {
       const albums = action.data ? action.data.albums : {}
+      const { items } = albums
       return {
         ...state,
         loading: false,
         data: {
-          ...albums,
-          items: albums.items,
+          items,
         },
       }
     }

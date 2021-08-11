@@ -1,15 +1,16 @@
 import React from 'react'
-import HoverableGridItem from './shared/HoverableGridItem'
+import HoverableCard from './shared/HoverableCard'
 
 const AlbumItem = (props) => {
-  const { item, onClick = () => {} } = props
+  const { item, onClick = () => {}, ...rest } = props
   return (
-    <HoverableGridItem
+    <HoverableCard
       id={item.id}
       imageUrl={item.images[1].url}
       title={item.name}
       subtitle={item.artists[0].name}
       onClick={onClick}
+      {...rest}
     />
   )
 }

@@ -16,12 +16,13 @@ export default (state = defaultState, action) => {
       }
     case actionTypes.FETCH_ARTISTS_SUCCESS: {
       const artists = action.data ? action.data.artists : {}
+      const { items } = artists
       return {
         ...state,
         loading: false,
         data: {
           ...artists,
-          items: [...state.data.items, ...artists.items],
+          items,
         },
       }
     }

@@ -1,14 +1,17 @@
-import React, { useEffect, useState } from 'react'
+import React, { useState, useEffect } from 'react'
+import clsx from 'clsx'
 import { useParams, useHistory } from 'react-router-dom'
 import { makeStyles } from '@material-ui/core/styles'
+import ArrowDownwardIcon from '@material-ui/icons/ArrowDownward'
+import ArrowUpwardIcon from '@material-ui/icons/ArrowUpward'
 import { Button } from '@material-ui/core'
-import Slider from 'react-slick'
 import TracksGroup from '../../shared/TracksGroup'
 import GenreTags from '../../shared/GenreTags'
 import AlbumItem from '../../AlbumItem'
-import HoverableGridItem from '../../shared/HoverableGridItem'
+import HoverableCard from '../../shared/HoverableCard'
 import SectionTitle from './SectionTitle'
-import PageWrapper from './PageWrapper'
+import ArtistLayout from './ArtistLayout'
+import Slider from '../../shared/Slider'
 
 const useStyles = makeStyles({
   root: {
@@ -42,19 +45,25 @@ const useStyles = makeStyles({
   },
   topTracks: {
     overflow: 'hidden',
+    maxHeight: 500,
+    transition: 'all 0.3s ease-in-out 0.2s',
+  },
+  topTrackExpanded: {
+    maxHeight: '400vh',
+  },
+  showAllBtn: {
+    textTransform: 'capitalize',
+    fontSize: 16,
+    fontWeight: 700,
+    margin: '10px 0px 0px',
   },
   relatedArtist: {
     borderRadius: '50%',
   },
+  sliderItemImg: {
+    height: 445,
+  },
 })
-
-const sliderProps = {
-  dots: false,
-  infinite: true,
-  speed: 500,
-  slidesToShow: 3,
-  slidesToScroll: 3,
-}
 
 const Artist = (props) => {
   const classes = useStyles()
@@ -82,16 +91,13 @@ const Artist = (props) => {
   ])
 
   return (
-    <PageWrapper {...props}>
+    <ArtistLayout {...props}>
       <section id="genresSection">
         <GenreTags items={artist.genres} />
       </section>
       <section
         id="topTracksSection"
-        className={classes.topTracks}
-        style={{
-          maxHeight: tracksExpanded ? 'unset' : 500,
-        }}
+        className={clsx(classes.topTracks, tracksExpanded ? classes.topTrackExpanded : '')}
       >
         <SectionTitle title="Top tracks" isShowAllBtn={false} />
         <TracksGroup
@@ -99,45 +105,50 @@ const Artist = (props) => {
           album={topTracks[0] && topTracks[0].album}
         />
       </section>
-      <Button onClick={() => setTracksExpanded(!tracksExpanded)}>
-        Show all tracks
+      <Button
+        className={classes.showAllBtn}
+        startIcon={tracksExpanded ? <ArrowUpwardIcon /> : <ArrowDownwardIcon />}
+        onClick={() => setTracksExpanded(((prev) => !prev))}
+      >
+        {`Show ${tracksExpanded ? 'less' : 'all'} tracks`}
       </Button>
       <section id="albumsSection">
         <SectionTitle
           title="Albums"
           onShowAllClick={() => history.push(`/artists/${id}/albums`)}
         />
-        <Slider {...sliderProps}>
-          {albums.map((album) => (
+        <Slider
+          items={albums}
+          renderItem={(album) => (
             <AlbumItem
               key={album.id}
               item={album}
-              onClick={() => history.push(`/albums/${album.id}`)}
+              imgClassName={classes.sliderItemImg}
+              to={`/albums/${album.id}`}
             />
-          ))}
-        </Slider>
+          )}
+        />
       </section>
+
       <section id="relatedArtists">
         <SectionTitle
           title="Related Artists"
           onShowAllClick={() => history.push(`/artists/${id}/related`)}
         />
-        <Slider {...sliderProps}>
-          {relatedArtists.map((_artist) => (
-            <HoverableGridItem
-              classes={{
-                root: classes.relatedArtist,
-                cover: classes.relatedArtist,
-              }}
+        <Slider
+          items={relatedArtists}
+          renderItem={(_artist) => (
+            <HoverableCard
               key={_artist.id}
-              onClick={() => history.push(`/artists/${_artist.id}`)}
+              imgClassName={classes.sliderItemImg}
               imageUrl={_artist.images[0]?.url}
               title={_artist.name}
+              to={`/artists/${_artist.id}`}
             />
-          ))}
-        </Slider>
+          )}
+        />
       </section>
-    </PageWrapper>
+    </ArtistLayout>
   )
 }
 

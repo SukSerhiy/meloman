@@ -32,7 +32,15 @@ module.exports = {
         ],
       },
       {
-        test: /\.(png|svg|jpg|gif|ttf)$/,
+        test: /\.s(a|c)ss$/,
+        use: [
+          'style-loader',
+          'css-loader',
+          'sass-loader',
+        ],
+      },
+      {
+        test: /\.(png|svg|jpg|gif|ttf|mp4)$/,
         use: ['file-loader'],
       },
     ],

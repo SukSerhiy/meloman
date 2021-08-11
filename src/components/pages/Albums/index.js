@@ -2,20 +2,21 @@ import React, { useEffect } from 'react'
 import SearchPage from '../../shared/SearchPage'
 import { getReleaseDate } from '../../../lib'
 import ListItem from './ListItem'
+import Vinil from '../../../assets/videos/vinil.mp4'
 
-const Albums = (props) => {
-  const {
-    fetchAlbums,
-    loading,
-    data: {
-      items,
-    },
-    clearAlbums,
-  } = props
+const Albums = ({
+  fetchAlbums,
+  loading,
+  data: {
+    items,
+  },
+  clearAlbums,
+}) => {
   useEffect(() => () => clearAlbums(), [clearAlbums])
   return (
     <SearchPage
       title="Albums"
+      videoBgSrc={Vinil}
       onFetch={fetchAlbums}
       onClear={clearAlbums}
       items={items}

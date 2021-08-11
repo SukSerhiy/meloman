@@ -2,6 +2,7 @@ import React, { useEffect } from 'react'
 import { useHistory } from 'react-router-dom'
 import SearchPage from '../../shared/SearchPage'
 import ListItem from './ListItem'
+import Band from '../../../assets/videos/band-playing.mp4'
 
 const Artists = (props) => {
   const {
@@ -21,6 +22,7 @@ const Artists = (props) => {
   return (
     <SearchPage
       title="Artists"
+      videoBgSrc={Band}
       loading={loading}
       onFetch={fetchArtists}
       onClear={clearArtists}

@@ -4,15 +4,19 @@ import { Link } from 'react-router-dom'
 
 const useStyles = makeStyles({
   root: {
-    height: 60,
+    height: 85,
     display: 'flex',
     alignItems: 'center',
     padding: '0px 1.5%',
-    backgroundColor: '#6f00ff',
-    backgroundImage: 'linear-gradient(45deg, #6f00ff 0%, transparent, #6f00ff 90%)',
+    // backgroundColor: '#000000bf',
+    backgroundColor: '#565a8a',
+    // backgroundImage: 'linear-gradient(45deg, #6f00ff 0%, transparent, #6f00ff 90%)',
+    position: 'relative',
+    zIndex: 2,
   },
   headerTitle: {
-    fontSize: 25,
+    fontSize: 30,
+    letterSpacing: 2,
     fontWeight: 'bold',
     color: '#fff',
     textDecoration: 'none',
