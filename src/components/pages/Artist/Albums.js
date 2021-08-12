@@ -5,7 +5,7 @@ import Pagination from '@material-ui/lab/Pagination'
 import AlbumItem from '../../AlbumItem'
 import PageWrapper from './ArtistLayout'
 
-const LIMIT = 50
+const LIMIT = 21
 
 const useStyles = makeStyles((theme) => ({
   root: {

@@ -1,17 +1,14 @@
 import React, { useEffect } from 'react'
 import { useParams, Link } from 'react-router-dom'
 import { makeStyles } from '@material-ui/core/styles'
-import IconButton from '@material-ui/core/IconButton';
-import ProgressWrapper from '../shared/ProgressWrapper'
 import TracksGroup from '../shared/TracksGroup'
 import SpotifyLogo from '../../assets/icons/spotify.svg'
-import ThreeDotsIcon from '../../assets/icons/three-dots-vertical.svg';
 
 const useStyles = makeStyles((theme) => ({
   root: {
-    padding: '0px 3%',
+    padding: '20px 3%',
     [theme.breakpoints.up('lg')]: {
-      padding: '0px 10%',
+      padding: '30px 10%',
     },
   },
   container: {
@@ -57,21 +54,12 @@ const useStyles = makeStyles((theme) => ({
     marginLeft: 20,
     cursor: 'pointer'
   },
-  menuButton: {
-    position: 'absolute',
-    right: 0,
-    marginRight: 20,
-  },
-  threeDotsIcon: {
-    height: 40,
-  },
 }))
 
 const Album = ({ fetchAlbum, loading, album }) => {
   const { id } = useParams()
   const classes = useStyles()
   const tracks = album.tracks.items
-  console.log('loading', loading)
   useEffect(() => {
     fetchAlbum(id)
   }, [fetchAlbum, id])
@@ -88,9 +76,6 @@ const Album = ({ fetchAlbum, loading, album }) => {
     <div className={classes.root}>
       <div className={classes.container}>
         <img className={classes.coverImg} src={imageUrl} alt="cover" />
-        <IconButton className={classes.menuButton}>
-          <img className={classes.threeDotsIcon} src={ThreeDotsIcon} alt="menu-icon" />
-        </IconButton>
         <div className={classes.albumBody}>
           <div style={{ display: 'flex' }}>
             <span className={classes.albumName}>{album.name}</span>
@@ -124,38 +109,6 @@ const Album = ({ fetchAlbum, loading, album }) => {
         album={album}
       />
     </div>
-    // <div className={classes.root}>
-    //   <div className={classes.albumHeader}>
-    //     <img src={imageUrl} alt="cover" />
-    //     <div className={classes.albumHeadeContent}>
-    //       <div className={classes.albumTitleContainer}>
-    //         <span className={classes.albumName}>{album.name}</span>
-    //         <Link
-    //           className={classes.artist}
-    //           to={`/artists/${artistId}`}
-    //         >
-    //           <span>{artistName}</span>
-    //         </Link>
-    //         <span className={classes.releaseDate}>
-    //           {new Date(
-    //             album.release_date,
-    //           ).toLocaleDateString(
-    //             'en-US',
-    //             {
-    //               year: 'numeric',
-    //               month: 'long',
-    //             },
-    //           )}
-    //         </span>
-    //       </div>
-    //   </div>
-    //   {/* <div className={classes.tracks}>
-    //     <TracksGroup
-    //       tracks={tracks}
-    //       album={album}
-    //     />
-    //   </div> */}
-    // </div>
   )
 }
 

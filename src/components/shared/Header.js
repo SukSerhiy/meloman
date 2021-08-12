@@ -1,6 +1,9 @@
-import React from 'react'
+import React, { useState } from 'react'
 import { makeStyles } from '@material-ui/core/styles'
 import { Link } from 'react-router-dom'
+import { IconButton } from '@material-ui/core'
+import MenuIcon from '@material-ui/icons/Menu'
+import Menu from './MenuBar'
 
 const useStyles = makeStyles({
   root: {
@@ -21,13 +24,22 @@ const useStyles = makeStyles({
     color: '#fff',
     textDecoration: 'none',
   },
+  menuIcon: {
+    fontSize: '40px',
+    color: '#fff',
+  },
 })
 
 const Header = () => {
   const classes = useStyles()
+  const [menuActive, setMenuActive] = useState(false)
   return (
     <header className={classes.root}>
+      <IconButton onClick={() => setMenuActive((prev) => !prev)}>
+        <MenuIcon className={classes.menuIcon} />
+      </IconButton>
       <Link to="/" className={classes.headerTitle}>Meloman</Link>
+      <Menu isActive={menuActive} />
     </header>
   )
 }

@@ -3,7 +3,7 @@ import { makeStyles } from '@material-ui/core/styles'
 import { useParams } from 'react-router-dom'
 import LazyImage from '../../shared/LazyImage'
 
-const useStyles = makeStyles({
+const useStyles = makeStyles((theme) => ({
   root: {
     padding: '40px 5% 40px',
     minHeight: '100%',
@@ -16,21 +16,30 @@ const useStyles = makeStyles({
     textAlign: 'center',
   },
   avatar: {
-    borderRadius: '50%',
-    width: 640,
-    height: 640,
     margin: '0 auto',
+    [theme.breakpoints.up('md')]: {
+      borderRadius: '50%',
+      width: 640,
+      height: 640,
+    },
   },
   title: {
-    color: '#f7ecec',
-    fontSize: 96,
     margin: 0,
+    fontSize: '4em',
+    padding: '10px 0px',
     position: 'relative',
-    bottom: 70,
-    letterSpacing: 6,
-    backgroundImage: 'radial-gradient(ellipse at center, #0000008a 0, transparent 70%, transparent 100%)',
+    display: 'inline-block',
+    [theme.breakpoints.up('md')]: {
+      bottom: 70,
+      fontSize: '8m',
+      borderRadius: '50%',
+      backgroundImage: 'radial-gradient(ellipse at center, #0000008a 0, transparent 100%)',
+      padding: '10px 100px',
+      letterSpacing: 6,
+      color: '#f7ecec',
+    },
   },
-})
+}))
 
 const ArtistLayout = (props) => {
   const classes = useStyles()
