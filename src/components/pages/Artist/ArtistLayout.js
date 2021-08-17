@@ -10,7 +10,6 @@ const useStyles = makeStyles((theme) => ({
     position: 'relative',
     backgroundColor: '#eedbc2',
     backgroundBlendMode: 'overlay',
-    // backgroundImage: 'linear-gradient(to bottom, rgba(238, 219, 194, 0.7) 0, rgba(238, 219, 194, 0.7) 60%, transparent 100%), linear-gradient(to right, transparent 0, rgba(238, 219, 194, 0.1) 10%, rgba(238, 219, 194, 0.1) 90%, transparent 100%)',
   },
   contentHeader: {
     textAlign: 'center',
@@ -25,7 +24,8 @@ const useStyles = makeStyles((theme) => ({
   },
   title: {
     margin: 0,
-    fontSize: '4em',
+    wordBreak: 'break-all',
+    fontSize: '3em',
     padding: '10px 0px',
     position: 'relative',
     display: 'inline-block',
