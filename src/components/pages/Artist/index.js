@@ -63,6 +63,9 @@ const useStyles = makeStyles({
   sliderItemImg: {
     height: 445,
   },
+  sliderItemWrapper: {
+    padding: 20,
+  },
 })
 
 const Artist = (props) => {
@@ -112,39 +115,45 @@ const Artist = (props) => {
       >
         {`Show ${tracksExpanded ? 'less' : 'all'} tracks`}
       </Button>
-      <section id="albumsSection">
+      <section>
         <SectionTitle
           title="Albums"
           onShowAllClick={() => history.push(`/artists/${id}/albums`)}
         />
         <Slider
+          id="albums-slider"
           items={albums}
           renderItem={(album) => (
-            <AlbumItem
-              key={album.id}
-              item={album}
-              imgClassName={classes.sliderItemImg}
-              to={`/albums/${album.id}`}
-            />
+            <div className={classes.sliderItemWrapper}>
+              <AlbumItem
+                key={album.id}
+                item={album}
+                imgClassName={classes.sliderItemImg}
+                to={`/albums/${album.id}`}
+              />
+            </div>
           )}
         />
       </section>
 
-      <section id="relatedArtists">
+      <section>
         <SectionTitle
           title="Related Artists"
           onShowAllClick={() => history.push(`/artists/${id}/related`)}
         />
         <Slider
+          id="related-artists-slider"
           items={relatedArtists}
           renderItem={(_artist) => (
-            <HoverableCard
-              key={_artist.id}
-              imgClassName={classes.sliderItemImg}
-              imageUrl={_artist.images[0]?.url}
-              title={_artist.name}
-              to={`/artists/${_artist.id}`}
-            />
+            <div className={classes.sliderItemWrapper}>
+              <HoverableCard
+                key={_artist.id}
+                imgClassName={classes.sliderItemImg}
+                imageUrl={_artist.images[0]?.url}
+                title={_artist.name}
+                to={`/artists/${_artist.id}`}
+              />
+            </div>
           )}
         />
       </section>

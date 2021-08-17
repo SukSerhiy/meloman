@@ -1,6 +1,6 @@
 import React from 'react'
 import { makeStyles } from '@material-ui/core/styles'
-import { ButtonBase } from '@material-ui/core'
+import { Button } from '@material-ui/core'
 
 const useStyles = makeStyles({
   root: {
@@ -9,6 +9,7 @@ const useStyles = makeStyles({
     alignItems: 'center',
   },
   showAll: {
+    textTransform: 'capitalize',
     fontWeight: 'bold',
     fontSize: 17,
   },
@@ -26,9 +27,9 @@ const SectionTitle = (props) => {
     <div className={classes.root}>
       <h2>{title}</h2>
       {isShowAllBtn && (
-        <ButtonBase className={classes.showAll} onClick={onShowAllClick}>
+        <Button className={classes.showAll} onClick={onShowAllClick}>
           <span>{showAllBtnText}</span>
-        </ButtonBase>
+        </Button>
       )}
     </div>
   )

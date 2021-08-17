@@ -1,4 +1,5 @@
 import React from 'react'
+import PropTypes from 'prop-types'
 import clsx from 'clsx'
 import { makeStyles } from '@material-ui/core/styles'
 import { Button } from '@material-ui/core'
@@ -35,10 +36,10 @@ const useStyles = makeStyles(() => ({
 
 SwiperCore.use([Navigation, Pagination, Scrollbar, A11y])
 
-const Slider = ({ items = [], keyName = 'id', renderItem = (item) => item }) => {
+const Slider = ({ id, items, keyName, renderItem }) => {
   const classes = useStyles()
   return (
-    <div className={classes.container}>
+    <div className={classes.container} id={id}>
       <Button className={clsx(classes.navigation, classes.prevBtn)}>
         <ArrowBackIosIcon />
       </Button>
@@ -51,8 +52,8 @@ const Slider = ({ items = [], keyName = 'id', renderItem = (item) => item }) => 
         slidesPerView={3}
         id="main"
         navigation={{
-          prevEl: `.${classes.prevBtn}`,
-          nextEl: `.${classes.nextBtn}`,
+          prevEl: `#${id} .${classes.prevBtn}`,
+          nextEl: `#${id} .${classes.nextBtn}`,
         }}
         pagination
       >
@@ -64,6 +65,19 @@ const Slider = ({ items = [], keyName = 'id', renderItem = (item) => item }) => 
       </Swiper>
     </div>
   )
+}
+
+Slider.defaultProps = {
+  items: [],
+  keyName: 'id',
+  renderItem: (item) => item,
+}
+
+Slider.propTypes = {
+  id: PropTypes.string.isRequired,
+  items: PropTypes.arrayOf(PropTypes.object),
+  keyName: PropTypes.string,
+  renderItem: PropTypes.func,
 }
 
 export default Slider
