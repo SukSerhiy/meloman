@@ -60,6 +60,9 @@ const useStyles = makeStyles((theme) => ({
     letterSpacing: '1px',
     marginLeft: 10,
   },
+  activeLink: {
+    color: 'yellow',
+  },
 }))
 
 const styleSheet = {
@@ -115,6 +118,7 @@ const Menu = () => {
             <NavLink
               key={l.to}
               className={classes.link}
+              activeClassName={classes.activeLink}
               to={l.to}
             >
               {l.label}
