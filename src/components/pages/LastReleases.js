@@ -1,9 +1,10 @@
-import React, { useEffect } from 'react'
-// import { useHistory } from 'react-router-dom'
-import { withStyles } from '@material-ui/core/styles'
+import React, { useEffect, useCallback } from 'react'
+import { useSelector, useDispatch } from 'react-redux'
+import { makeStyles } from '@material-ui/core/styles'
+import { fetchLastReleases } from '../../actions/lastReleases'
 import AlbumItem from '../AlbumItem'
 
-const styles = (theme) => ({
+const useStyles = makeStyles((theme) => ({
   root: {
     padding: '0px 3%',
     [theme.breakpoints.up('lg')]: {
@@ -21,21 +22,22 @@ const styles = (theme) => ({
       gridTemplateColumns: 'repeat(3, 1fr)',
     },
   },
-})
+}))
 
-const LastReleases = (props) => {
+const LastReleases = () => {
+  const classes = useStyles()
+  const lastReleases = useSelector((store) => store.lastReleases)
   const {
-    classes,
-    fetchLastReleases,
-    // loading: loadingProp,
-    data: {
-      items,
-      // offset,
-      // limit,
-      // total,
-      // next,
-    },
-  } = props
+    data:
+      {
+        items = [],
+      },
+  } = lastReleases
+  const dispatch = useDispatch()
+  const fetchItems = useCallback(
+    () => dispatch(fetchLastReleases()),
+    [dispatch],
+  )
   // const canLoadMore = Boolean(next)
   // const nextOffset = offset + limit
   // const loadMore = () => {
@@ -45,9 +47,9 @@ const LastReleases = (props) => {
   // }
   useEffect(() => {
     if (items.length === 0) {
-      fetchLastReleases()
+      fetchItems()
     }
-  }, [fetchLastReleases, items.length])
+  }, [fetchItems, items.length])
   // const history = useHistory()
   // const loading = loadingProp && !nextOffset
 
@@ -78,4 +80,4 @@ const LastReleases = (props) => {
   )
 }
 
-export default withStyles(styles)(LastReleases)
+export default LastReleases

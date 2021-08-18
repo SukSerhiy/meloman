@@ -3,7 +3,7 @@ import {
   HashRouter as Router,
   Switch,
 } from 'react-router-dom'
-import LastReleases from '../../containers/LastReleases'
+import LastReleases from '../pages/LastReleases'
 import Albums from '../../containers/Albums'
 import Artists from '../../containers/Artists'
 import Artist from '../../containers/Artist'

@@ -7,7 +7,7 @@ export const actionTypes = {
   FETCH_LAST_RELEASES_ERROR: 'lastReleases/FETCH_LAST_RELEASES_ERROR',
 }
 
-export const fetchLastReleases = ({ offset, limit }) => (dispatch) => {
+export const fetchLastReleases = ({ offset = 0, limit = 20 } = {}) => (dispatch) => {
   dispatch({ type: actionTypes.FETCH_LAST_RELEASES_REQUEST })
   getApi().fetchLastReleases({ offset, limit })
     .then((resp) => {
