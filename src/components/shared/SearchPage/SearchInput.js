@@ -1,9 +1,10 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import { makeStyles } from '@material-ui/core/styles'
 import {
   FormControl, InputLabel, OutlinedInput, InputAdornment, IconButton,
 } from '@material-ui/core'
 import SearchIcon from '@material-ui/icons/Search'
+import { useDebounce } from '../../../hooks'
 
 const useStyles = makeStyles((theme) => ({
   margin: {
@@ -22,6 +23,15 @@ const SearchInput = (props) => {
   const classes = useStyles()
   const { onSearch } = props
   const [searchStr, setSearchStr] = useState('')
+  const debouncedValue = useDebounce(searchStr)
+  const onInputChange = (e) => {
+    setSearchStr(e.target.value)
+  }
+  useEffect(() => {
+    if (debouncedValue) {
+      onSearch(debouncedValue)
+    }
+  }, [debouncedValue])
   return (
     <FormControl fullWidth className={classes.margin} variant="outlined">
       <InputLabel htmlFor="search-input">Search</InputLabel>
@@ -32,23 +42,17 @@ const SearchInput = (props) => {
         variant="outlined"
         className={classes.searchInput}
         labelWidth={60}
-        onChange={(e) => {
-          setSearchStr(e.target.value)
-        }}
-        onBlur={() => {
-          if (searchStr) {
-            onSearch(searchStr)
-          }
-        }}
+        onChange={onInputChange}
         onKeyDown={(e) => {
           if (e.key === 'Enter') {
-            onSearch(searchStr)
+            onSearch(debouncedValue)
           }
         }}
         endAdornment={(
           <InputAdornment position="end">
             <IconButton
               edge="end"
+              onClick={() => onSearch(debouncedValue)}
             >
               <SearchIcon />
             </IconButton>
