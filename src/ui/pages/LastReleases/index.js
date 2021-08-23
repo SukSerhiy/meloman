@@ -1,8 +1,8 @@
 import React, { useEffect, useCallback } from 'react'
 import { useSelector, useDispatch } from 'react-redux'
 import { makeStyles } from '@material-ui/core/styles'
-import { fetchLastReleases } from '../../actions/lastReleases'
-import AlbumItem from '../AlbumItem'
+import AlbumItem from '../../AlbumItem'
+import { fetchLastReleases } from './lastReleasesSlice'
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -35,6 +35,7 @@ const LastReleases = () => {
   } = lastReleases
   const dispatch = useDispatch()
   const fetchItems = useCallback(
+    // () => dispatch(fetchLastReleases()),
     () => dispatch(fetchLastReleases()),
     [dispatch],
   )

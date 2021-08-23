@@ -1,6 +1,6 @@
 import { connect } from 'react-redux'
 import { fetchAlbum } from '../actions/album'
-import Album from '../components/pages/Album'
+import Album from '../ui/pages/Album'
 
 const mapStateToProps = (state) => ({
   loading: state.album.loading,

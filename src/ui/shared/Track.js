@@ -8,7 +8,7 @@ import PlayImg from '../../assets/icons/play-button.svg'
 import PauseImg from '../../assets/icons/pause.svg'
 import VolumeIcon from '../../assets/icons/volume.svg'
 import MuteIcon from '../../assets/icons/mute.svg'
-import { getReleaseDate } from '../../lib'
+import { getReleaseDate } from '../../utils/date'
 import { TRACK_STATUSES } from '../../constants'
 
 const styles = {
@@ -303,7 +303,9 @@ class Track extends Component {
                 {album.name}
               </Link>
               <span className={classes.releaseDate}>
-                {album.release_date && getReleaseDate(album)}
+                {album.release_date && getReleaseDate(
+                  album.release_date, album.release_date_precision,
+                )}
               </span>
             </div>
           </div>

@@ -4,8 +4,9 @@ import {
   Switch,
 } from 'react-router-dom'
 import LastReleases from '../pages/LastReleases'
-import Albums from '../../containers/Albums'
-import Artists from '../../containers/Artists'
+// import Albums from '../../containers/Albums'
+import Albums from '../pages/Albums'
+import Artists from '../pages/Artists'
 import Artist from '../../containers/Artist'
 import ArtistAlbums from '../../containers/ArtistAlbums'
 import RelatedArtists from '../../containers/RelatedArtists'

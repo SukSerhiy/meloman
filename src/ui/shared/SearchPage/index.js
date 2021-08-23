@@ -1,4 +1,5 @@
 import React, { useEffect } from 'react'
+import PropTypes from 'prop-types'
 import { makeStyles } from '@material-ui/core/styles'
 import { useHistory } from 'react-router-dom'
 import ProgressWrapper from '../ProgressWrapper'
@@ -48,7 +49,7 @@ const SearchPage = ({
   loading,
   title,
   items,
-  onClear = () => {},
+  onClear,
   videoBgSrc,
   renderListItem,
 }) => {
@@ -73,7 +74,7 @@ const SearchPage = ({
       <ProgressWrapper loading={loading}>
         <div className={classes.list}>
           {items.map((item) => (
-            <div className={classes.listItem}>
+            <div className={classes.listItem} key={items.id}>
               {renderListItem(item)}
             </div>
           ))}
@@ -81,6 +82,28 @@ const SearchPage = ({
       </ProgressWrapper>
     </div>
   )
+}
+
+SearchPage.defaultProps = {
+  onFetch: () => {},
+  loading: false,
+  title: '',
+  items: [],
+  onClear: () => {},
+  videoBgSrc: '',
+  renderListItem: () => {},
+}
+
+SearchPage.propTypes = {
+  onFetch: PropTypes.func,
+  loading: PropTypes.bool,
+  title: PropTypes.string,
+  items: PropTypes.arrayOf(PropTypes.shape({
+    id: PropTypes.string,
+  })),
+  onClear: PropTypes.func,
+  videoBgSrc: PropTypes.string,
+  renderListItem: PropTypes.func,
 }
 
 export default SearchPage

@@ -5,7 +5,7 @@ import { PersistGate } from 'redux-persist/integration/react'
 import { createHashHistory } from 'history'
 import { syncHistoryWithStore } from 'react-router-redux'
 import './index.css'
-import Routes from './components/Routes/Routes'
+import Routes from './ui/Routes/Routes'
 import configureStore from './configureStore'
 
 const { persistor, store } = configureStore()

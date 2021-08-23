@@ -19,9 +19,8 @@ const useStyles = makeStyles((theme) => ({
   },
 }))
 
-const SearchInput = (props) => {
+const SearchInput = ({ onSearch }) => {
   const classes = useStyles()
-  const { onSearch } = props
   const [searchStr, setSearchStr] = useState('')
   const debouncedValue = useDebounce(searchStr)
   const onInputChange = (e) => {

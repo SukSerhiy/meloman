@@ -3,7 +3,7 @@ import {
   fetchArtist,
   fetchArtistAlbums,
 } from '../actions/artist'
-import Albums from '../components/pages/Artist/Albums'
+import Albums from '../ui/pages/Artist/Albums'
 
 const mapStateToProps = (state) => ({
   loading: state.artist.loading,

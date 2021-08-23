@@ -2,7 +2,7 @@ import React, { useEffect } from 'react'
 import { useParams, Link } from 'react-router-dom'
 import { makeStyles } from '@material-ui/core/styles'
 import TracksGroup from '../shared/TracksGroup'
-import SpotifyLogo from '../../assets/icons/spotify.svg'
+import SpotifyLink from '../shared/SpotifyLink'
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -49,11 +49,6 @@ const useStyles = makeStyles((theme) => ({
       color: '#b18a42',
     },
   },
-  spotifyLogo: {
-    width: 20,
-    marginLeft: 20,
-    cursor: 'pointer'
-  },
 }))
 
 const Album = ({ fetchAlbum, loading, album }) => {
@@ -79,12 +74,7 @@ const Album = ({ fetchAlbum, loading, album }) => {
         <div className={classes.albumBody}>
           <div style={{ display: 'flex' }}>
             <span className={classes.albumName}>{album.name}</span>
-            <img
-              src={SpotifyLogo}
-              className={classes.spotifyLogo}
-              onClick={() => window.open(album.external_urls.spotify, '_blank')}
-              alt="spotify"
-            />
+            <SpotifyLink spotifyUrl={album?.external_urls?.spotify} />
           </div>
           {album.artists?.map((artist) => (
             <div key={artist.id}>
@@ -94,12 +84,7 @@ const Album = ({ fetchAlbum, loading, album }) => {
               >
                 <span>{artist.name}</span>
               </Link>
-              <img
-                src={SpotifyLogo}
-                className={classes.spotifyLogo}
-                onClick={() => window.open(artist.external_urls.spotify, '_blank')}
-                alt="spotify"
-              />
+              <SpotifyLink spotifyUrl={artist?.external_urls?.spotify} />
             </div>
           ))}
         </div>

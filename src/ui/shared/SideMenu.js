@@ -113,10 +113,9 @@ const Menu = () => {
       </IconButton>
       <nav className={clsx(classes.menu, isActive ? classes.menuActive : '')}>
         {routeLinks.map((l) => (
-          <div className={classes.item}>
+          <div className={classes.item} key={l.to}>
             {l.icon}
             <NavLink
-              key={l.to}
               className={classes.link}
               activeClassName={classes.activeLink}
               to={l.to}
