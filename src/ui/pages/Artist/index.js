@@ -1,4 +1,5 @@
-import React, { useState, useEffect } from 'react'
+import React, { useState, useEffect, useCallback } from 'react'
+import { useSelector, useDispatch } from 'react-redux'
 import clsx from 'clsx'
 import { useParams, useHistory } from 'react-router-dom'
 import { makeStyles } from '@material-ui/core/styles'
@@ -9,9 +10,10 @@ import TracksGroup from '../../shared/TracksGroup'
 import GenreTags from '../../shared/GenreTags'
 import AlbumItem from '../../AlbumItem'
 import HoverableCard from '../../shared/HoverableCard'
+import Slider from '../../shared/Slider'
 import SectionTitle from './components/SectionTitle'
 import ArtistLayout from './components/ArtistLayout'
-import Slider from '../../shared/Slider'
+import * as actions from './artistSlice'
 
 const useStyles = makeStyles({
   root: {
@@ -68,25 +70,43 @@ const useStyles = makeStyles({
   },
 })
 
-const Artist = (props) => {
+const Artist = () => {
   const classes = useStyles()
+  const dispatch = useDispatch()
+  const history = useHistory()
   const { id } = useParams()
   const [tracksExpanded, setTracksExpanded] = useState(false)
   const {
-    fetchTopTracks,
-    fetchArtistAlbums,
-    fetchRelatedArtists,
-    artist,
+    loading,
+    data: artist,
     topTracks,
-    albums,
+    albums: { items: albums },
     relatedArtists,
-  } = props
-  const history = useHistory()
+  } = useSelector((store) => store.artist)
+
+  const fetchArtist = useCallback((_id) => {
+    dispatch(actions.fetchArtist(_id))
+  }, [dispatch])
+
+  const fetchTopTracks = useCallback((_id, market) => {
+    dispatch(actions.fetchTopTracks({ id: _id, market }))
+  }, [dispatch])
+
+  const fetchArtistAlbums = useCallback((_id) => {
+    dispatch(actions.fetchArtistAlbums({ artistId: _id }))
+  }, [dispatch])
+
+  const fetchRelatedArtists = useCallback((_id) => {
+    dispatch(actions.fetchRelatedArtists(_id))
+  }, [dispatch])
+
   useEffect(() => {
+    fetchArtist(id)
     fetchTopTracks(id)
     fetchArtistAlbums(id)
     fetchRelatedArtists(id)
   }, [
+    fetchArtist,
     fetchTopTracks,
     fetchArtistAlbums,
     fetchRelatedArtists,
@@ -94,7 +114,11 @@ const Artist = (props) => {
   ])
 
   return (
-    <ArtistLayout {...props}>
+    <ArtistLayout
+      loading={loading}
+      artist={artist}
+      fetchArtist={fetchArtist}
+    >
       <section id="genresSection">
         <GenreTags items={artist.genres} />
       </section>

@@ -1,7 +1,7 @@
 import { createSlice, createAsyncThunk } from '@reduxjs/toolkit'
 import { getApi } from '../../../config'
 
-export const initialState = {
+const initialState = {
   loading: false,
   data: {
     items: [],

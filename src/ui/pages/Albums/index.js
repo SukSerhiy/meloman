@@ -1,10 +1,7 @@
 import React, { useEffect, useCallback } from 'react'
 import { useSelector, useDispatch } from 'react-redux'
 import SearchPage from '../../shared/SearchPage'
-import {
-  fetchAlbums as fetchAlbumsAction,
-  clearAlbums as clearAlbumsAction,
-} from './albumsSlice'
+import * as actions from './albumsSlice'
 import ListItem from './components/ListItem'
 import Vinil from '../../../assets/videos/vinil.mp4'
 
@@ -19,11 +16,11 @@ const Albums = () => {
   } = albums
 
   const fetchAlbums = useCallback((searchStr) => {
-    dispatch(fetchAlbumsAction(searchStr))
+    dispatch(actions.fetchAlbums(searchStr))
   }, [dispatch])
 
   const clearAlbums = useCallback(() => {
-    dispatch(clearAlbumsAction())
+    dispatch(actions.clearAlbums())
   }, [dispatch])
 
   useEffect(() => () => clearAlbums(), [clearAlbums])

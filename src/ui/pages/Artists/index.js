@@ -1,9 +1,6 @@
 import React, { useEffect, useCallback } from 'react'
 import { useSelector, useDispatch } from 'react-redux'
-import {
-  fetchArtists as fetchArtistsAction,
-  clearArtists as clearArtistsAction,
-} from './artistsSlice'
+import * as actions from './artistsSlice'
 import SearchPage from '../../shared/SearchPage'
 import ListItem from './components/ListItem'
 import BandVideo from '../../../assets/videos/band-playing.mp4'
@@ -19,11 +16,11 @@ const Artists = () => {
   } = artists
 
   const fetchArtists = useCallback((searchStr) => {
-    dispatch(fetchArtistsAction(searchStr))
+    dispatch(actions.fetchArtists(searchStr))
   }, [dispatch])
 
   const clearArtists = useCallback(() => {
-    dispatch(clearArtistsAction())
+    dispatch(actions.clearArtists())
   }, [dispatch])
 
   useEffect(() => () => clearArtists(), [clearArtists])

@@ -2,7 +2,7 @@ import React, { useEffect, useCallback } from 'react'
 import { useSelector, useDispatch } from 'react-redux'
 import { makeStyles } from '@material-ui/core/styles'
 import AlbumItem from '../../AlbumItem'
-import { fetchLastReleases } from './lastReleasesSlice'
+import * as actions from './lastReleasesSlice'
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -34,9 +34,8 @@ const LastReleases = () => {
       },
   } = lastReleases
   const dispatch = useDispatch()
-  const fetchItems = useCallback(
-    // () => dispatch(fetchLastReleases()),
-    () => dispatch(fetchLastReleases()),
+  const fetchLastReleases = useCallback(
+    () => dispatch(actions.fetchLastReleases()),
     [dispatch],
   )
   // const canLoadMore = Boolean(next)
@@ -48,9 +47,9 @@ const LastReleases = () => {
   // }
   useEffect(() => {
     if (items.length === 0) {
-      fetchItems()
+      fetchLastReleases()
     }
-  }, [fetchItems, items.length])
+  }, [fetchLastReleases, items.length])
   // const history = useHistory()
   // const loading = loadingProp && !nextOffset
 

@@ -41,14 +41,10 @@ const useStyles = makeStyles((theme) => ({
   },
 }))
 
-const ArtistLayout = (props) => {
+const ArtistLayout = ({
+  loading, artist, fetchArtist, children,
+}) => {
   const classes = useStyles()
-  const {
-    loading,
-    artist,
-    fetchArtist,
-    children,
-  } = props
   const { id } = useParams()
   const imageUrl = artist.images && artist.images[0]?.url
   useEffect(() => {

@@ -3,8 +3,8 @@ import { composeWithDevTools } from 'redux-devtools-extension'
 import thunk from 'redux-thunk'
 import storage from 'redux-persist/lib/storage'
 import { persistStore, persistReducer } from 'redux-persist'
-import rootReducer from './reducers'
-import { jwt } from './middleware'
+import rootReducer from '../reducers'
+import { jwt } from '../middleware'
 
 const persistConfig = {
   key: 'root',

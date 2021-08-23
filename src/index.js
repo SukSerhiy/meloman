@@ -6,7 +6,7 @@ import { createHashHistory } from 'history'
 import { syncHistoryWithStore } from 'react-router-redux'
 import './index.css'
 import Routes from './ui/Routes/Routes'
-import configureStore from './configureStore'
+import configureStore from './redux/configureStore'
 
 const { persistor, store } = configureStore()
 

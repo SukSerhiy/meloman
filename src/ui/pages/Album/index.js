@@ -4,7 +4,7 @@ import { useParams, Link } from 'react-router-dom'
 import { makeStyles } from '@material-ui/core/styles'
 import TracksGroup from '../../shared/TracksGroup'
 import SpotifyLink from '../../shared/SpotifyLink'
-import { fetchAlbum as fetchAlbumAction } from './albumSlice'
+import * as actions from './albumSlice'
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -61,7 +61,7 @@ const Album = () => {
   const tracks = album.tracks.items
 
   const fetchAlbum = useCallback((_id) => {
-    dispatch(fetchAlbumAction(_id))
+    dispatch(actions.fetchAlbum(_id))
   }, [dispatch])
 
   useEffect(() => {

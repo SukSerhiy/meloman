@@ -82,7 +82,7 @@ class Api {
       })
   }
 
-  async fetchArtistTopTracks(id, market = 'UA') {
+  async fetchTopTracks(id, market = 'UA') {
     return this.axios
       .get(`/v1/artists/${id}/top-tracks?market=${market}`, {
         headers: {
