@@ -1,8 +1,10 @@
-import React, { useEffect } from 'react'
+import React, { useEffect, useCallback } from 'react'
+import { useSelector, useDispatch } from 'react-redux'
 import { useParams, Link } from 'react-router-dom'
 import { makeStyles } from '@material-ui/core/styles'
-import TracksGroup from '../shared/TracksGroup'
-import SpotifyLink from '../shared/SpotifyLink'
+import TracksGroup from '../../shared/TracksGroup'
+import SpotifyLink from '../../shared/SpotifyLink'
+import { fetchAlbum as fetchAlbumAction } from './albumSlice'
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -51,21 +53,24 @@ const useStyles = makeStyles((theme) => ({
   },
 }))
 
-const Album = ({ fetchAlbum, loading, album }) => {
+const Album = () => {
   const { id } = useParams()
   const classes = useStyles()
+  const dispatch = useDispatch()
+  const { loading, data: album } = useSelector((store) => store.album)
   const tracks = album.tracks.items
+
+  const fetchAlbum = useCallback((_id) => {
+    dispatch(fetchAlbumAction(_id))
+  }, [dispatch])
+
   useEffect(() => {
     fetchAlbum(id)
   }, [fetchAlbum, id])
-  useEffect(() => {
-    if (!loading) {
 
-    }
-  }, [loading])
   const imageUrl = album.images && album.images[1]?.url
   if (loading) {
-    return null;
+    return null
   }
   return (
     <div className={classes.root}>
@@ -89,10 +94,7 @@ const Album = ({ fetchAlbum, loading, album }) => {
           ))}
         </div>
       </div>
-      <TracksGroup
-        tracks={tracks}
-        album={album}
-      />
+      <TracksGroup tracks={tracks} album={album} />
     </div>
   )
 }

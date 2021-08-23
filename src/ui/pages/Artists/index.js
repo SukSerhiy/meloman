@@ -5,7 +5,7 @@ import {
   clearArtists as clearArtistsAction,
 } from './artistsSlice'
 import SearchPage from '../../shared/SearchPage'
-import ListItem from './ListItem'
+import ListItem from './components/ListItem'
 import BandVideo from '../../../assets/videos/band-playing.mp4'
 
 const Artists = () => {

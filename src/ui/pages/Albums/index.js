@@ -5,7 +5,7 @@ import {
   fetchAlbums as fetchAlbumsAction,
   clearAlbums as clearAlbumsAction,
 } from './albumsSlice'
-import ListItem from './ListItem'
+import ListItem from './components/ListItem'
 import Vinil from '../../../assets/videos/vinil.mp4'
 
 const Albums = () => {

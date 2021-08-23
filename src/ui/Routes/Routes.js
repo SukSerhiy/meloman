@@ -10,7 +10,7 @@ import Artists from '../pages/Artists'
 import Artist from '../../containers/Artist'
 import ArtistAlbums from '../../containers/ArtistAlbums'
 import RelatedArtists from '../../containers/RelatedArtists'
-import Album from '../../containers/Album'
+import Album from '../pages/Album'
 import LayoutRoute from './LayoutRoute'
 
 const App = ({ history }) => (

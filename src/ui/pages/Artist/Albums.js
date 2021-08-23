@@ -3,7 +3,7 @@ import { useParams } from 'react-router-dom'
 import { makeStyles } from '@material-ui/core/styles'
 import Pagination from '@material-ui/lab/Pagination'
 import AlbumItem from '../../AlbumItem'
-import PageWrapper from './ArtistLayout'
+import PageWrapper from './components/ArtistLayout'
 
 const LIMIT = 21
 

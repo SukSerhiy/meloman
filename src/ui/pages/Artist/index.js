@@ -9,8 +9,8 @@ import TracksGroup from '../../shared/TracksGroup'
 import GenreTags from '../../shared/GenreTags'
 import AlbumItem from '../../AlbumItem'
 import HoverableCard from '../../shared/HoverableCard'
-import SectionTitle from './SectionTitle'
-import ArtistLayout from './ArtistLayout'
+import SectionTitle from './components/SectionTitle'
+import ArtistLayout from './components/ArtistLayout'
 import Slider from '../../shared/Slider'
 
 const useStyles = makeStyles({

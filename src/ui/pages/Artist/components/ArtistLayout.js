@@ -1,7 +1,7 @@
 import React, { useEffect } from 'react'
 import { makeStyles } from '@material-ui/core/styles'
 import { useParams } from 'react-router-dom'
-import LazyImage from '../../shared/LazyImage'
+import LazyImage from '../../../shared/LazyImage'
 
 const useStyles = makeStyles((theme) => ({
   root: {

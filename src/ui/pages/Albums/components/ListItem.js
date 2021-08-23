@@ -2,9 +2,9 @@ import React from 'react'
 import PropTypes from 'prop-types'
 import { makeStyles } from '@material-ui/core/styles'
 import { Link } from 'react-router-dom'
-import SpotifyLink from '../../shared/SpotifyLink'
-import * as sharedPropTypes from '../../../propTypes'
-import { getReleaseDate } from '../../../utils/date'
+import SpotifyLink from '../../../shared/SpotifyLink'
+import * as sharedPropTypes from '../../../../propTypes'
+import { getReleaseDate } from '../../../../utils/date'
 
 const useStyles = makeStyles({
   root: {
