@@ -1,9 +1,11 @@
-import React, { useEffect } from 'react'
+import React, { useEffect, useCallback } from 'react'
+import { useSelector, useDispatch } from 'react-redux'
 import { useParams } from 'react-router-dom'
 import { makeStyles } from '@material-ui/core/styles'
 import Pagination from '@material-ui/lab/Pagination'
+import * as actions from '../../../redux/slices/artist'
 import AlbumItem from '../../AlbumItem'
-import PageWrapper from './components/ArtistLayout'
+import ArtistLayout from './components/ArtistLayout'
 
 const LIMIT = 21
 
@@ -17,31 +19,10 @@ const useStyles = makeStyles((theme) => ({
     backgroundSize: 'cover',
     backgroundBlendMode: 'overlay',
   },
-  content: {
-    zIndex: 1,
-    flex: 1,
-    backgroundImage: 'linear-gradient(90deg, transparent 0, #a9a9a9d6 1%, #a9a9a9d6 99%, transparent 100%)',
-    padding: '0px 3%',
-  },
   contentTitle: {
     display: 'flex',
     flexDirection: 'column',
     alignItems: 'center',
-  },
-  title: {
-    color: '#ffff',
-    fontSize: 96,
-    margin: 0,
-    position: 'relative',
-    bottom: 70,
-    letterSpacing: 6,
-    backgroundImage: 'radial-gradient(ellipse at center, #0000008a 0, transparent 70%, transparent 100%)',
-  },
-  topTracks: {
-    overflow: 'hidden',
-  },
-  relatedArtist: {
-    borderRadius: '50%',
   },
   grid: {
     display: 'grid',
@@ -68,11 +49,13 @@ const useStyles = makeStyles((theme) => ({
   },
 }))
 
-const Artist = (props) => {
+const Artist = () => {
   const classes = useStyles()
   const { id } = useParams()
+  const dispatch = useDispatch()
   const {
-    fetchArtistAlbums,
+    loading,
+    data: artist,
     albums: {
       items,
       previous,
@@ -80,22 +63,37 @@ const Artist = (props) => {
       offset,
       total,
     },
-  } = props
+  } = useSelector((store) => store.artist)
+
+  const fetchArtist = useCallback((_id) => {
+    dispatch(actions.fetchArtist(_id))
+  }, [dispatch])
+
+  const fetchArtistAlbums = useCallback((...rest) => {
+    dispatch(actions.fetchArtistAlbums(...rest))
+  }, [dispatch])
+
+  // useEffect(() => {
+  //   fetchArtist(id)
+  // }, [fetchArtist, id])
+
   useEffect(() => {
-    fetchArtistAlbums(id, 0, LIMIT)
-  }, [
-    fetchArtistAlbums,
-    id,
-  ])
+    fetchArtistAlbums({ artistId: id, limit: LIMIT })
+  }, [fetchArtistAlbums, id])
 
   const onPageChanged = (e) => {
     const newPage = e.target.innerText
     const newOffset = (newPage - 1) * LIMIT
-    fetchArtistAlbums(id, newOffset, LIMIT)
+    fetchArtistAlbums({ artistId: id, offset: newOffset, limit: LIMIT })
   }
 
   return (
-    <PageWrapper imageToBackground {...props}>
+    <ArtistLayout
+      imageToBackground
+      loading={loading}
+      artist={artist}
+      fetchArtist={fetchArtist}
+    >
       <div className={classes.grid}>
         {items.map((album) => (
           <AlbumItem
@@ -118,7 +116,7 @@ const Artist = (props) => {
           />
         )}
       </section>
-    </PageWrapper>
+    </ArtistLayout>
   )
 }
 

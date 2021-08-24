@@ -13,7 +13,7 @@ import HoverableCard from '../../shared/HoverableCard'
 import Slider from '../../shared/Slider'
 import SectionTitle from './components/SectionTitle'
 import ArtistLayout from './components/ArtistLayout'
-import * as actions from './artistSlice'
+import * as actions from '../../../redux/slices/artist'
 
 const useStyles = makeStyles({
   root: {

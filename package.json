@@ -30,7 +30,8 @@
     "redux-thunk": "^2.3.0",
     "slick-carousel": "^1.8.1",
     "swiper": "^6.8.1",
-    "web-vitals": "^0.2.4"
+    "web-vitals": "^0.2.4",
+    "redux-logger": "^3.0.6"
   },
   "scripts": {
     "start": "webpack serve",
@@ -87,7 +88,6 @@
     "html-webpack-plugin": "^4.5.0",
     "jest": "26.6.0",
     "react-test-renderer": "^17.0.1",
-    "redux-logger": "^3.0.6",
     "sass": "^1.37.5",
     "sass-loader": "^12.1.0",
     "style-loader": "^2.0.0",

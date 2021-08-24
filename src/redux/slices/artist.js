@@ -1,5 +1,5 @@
 import { createSlice, createAsyncThunk } from '@reduxjs/toolkit'
-import { getApi } from '../../../config'
+import api from '../../api/spotify'
 
 const initialState = {
   loading: false,
@@ -19,7 +19,7 @@ const initialState = {
 export const fetchArtist = createAsyncThunk(
   'artist/fetch',
   async (id = '') => {
-    const resp = await getApi().fetchArtist(id)
+    const resp = await api.fetchArtist(id)
     return resp.data
   },
 )
@@ -27,7 +27,7 @@ export const fetchArtist = createAsyncThunk(
 export const fetchTopTracks = createAsyncThunk(
   'artist/top-tracks/fetch',
   async ({ id, market }) => {
-    const resp = await getApi().fetchTopTracks(id, market)
+    const resp = await api.fetchTopTracks(id, market)
     return resp.data
   },
 )
@@ -35,7 +35,7 @@ export const fetchTopTracks = createAsyncThunk(
 export const fetchArtistAlbums = createAsyncThunk(
   'artist/albums/fetch',
   async ({ artistId, offset = 0, limit = 20 }) => {
-    const resp = await getApi().fetchArtistAlbums(artistId, offset, limit)
+    const resp = await api.fetchArtistAlbums(artistId, offset, limit)
     return resp.data
   },
 )
@@ -43,7 +43,7 @@ export const fetchArtistAlbums = createAsyncThunk(
 export const fetchRelatedArtists = createAsyncThunk(
   'artist/related-artists/fetch',
   async (artistId) => {
-    const resp = await getApi().fetchRelatedArtists(artistId)
+    const resp = await api.fetchRelatedArtists(artistId)
     return resp.data
   },
 )
@@ -73,13 +73,13 @@ const artistSlice = createSlice({
       state.hasErrors = false
     })
     builder.addMatcher(
-      (action) => action.type.endsWith('/pending'),
+      (action) => action.type.startsWith('artist/') && action.type.endsWith('/pending'),
       (state) => {
         state.loading = true
       },
     )
     builder.addMatcher(
-      (action) => action.type.endsWith('/rejected'),
+      (action) => action.type.startsWith('artist/') && action.type.endsWith('/rejected'),
       (state) => {
         state.loading = false
         state.hasErrors = true

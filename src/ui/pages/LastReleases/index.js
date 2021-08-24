@@ -2,7 +2,7 @@ import React, { useEffect, useCallback } from 'react'
 import { useSelector, useDispatch } from 'react-redux'
 import { makeStyles } from '@material-ui/core/styles'
 import AlbumItem from '../../AlbumItem'
-import * as actions from './lastReleasesSlice'
+import * as actions from '../../../redux/slices/lastReleases'
 
 const useStyles = makeStyles((theme) => ({
   root: {

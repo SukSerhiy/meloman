@@ -1,45 +1,12 @@
-import React, { useEffect } from 'react'
+import React, { useEffect, useCallback } from 'react'
+import { useSelector, useDispatch } from 'react-redux'
 import { useParams } from 'react-router-dom'
 import { makeStyles } from '@material-ui/core/styles'
 import HoverableCard from '../../shared/HoverableCard'
-import PageWrapper from './components/ArtistLayout'
+import * as actions from '../../../redux/slices/artist'
+import ArtistLayout from './components/ArtistLayout'
 
 const useStyles = makeStyles((theme) => ({
-  root: {
-    display: 'flex',
-    flexDirection: 'column',
-    padding: '0px 10%',
-    minHeight: '100%',
-    position: 'relative',
-    backgroundSize: 'cover',
-    backgroundBlendMode: 'overlay',
-  },
-  content: {
-    zIndex: 1,
-    flex: 1,
-    backgroundImage: 'linear-gradient(90deg, transparent 0, #a9a9a9d6 1%, #a9a9a9d6 99%, transparent 100%)',
-    padding: '0px 3%',
-  },
-  contentTitle: {
-    display: 'flex',
-    flexDirection: 'column',
-    alignItems: 'center',
-  },
-  title: {
-    color: '#ffff',
-    fontSize: 96,
-    margin: 0,
-    position: 'relative',
-    bottom: 70,
-    letterSpacing: 6,
-    backgroundImage: 'radial-gradient(ellipse at center, #0000008a 0, transparent 70%, transparent 100%)',
-  },
-  topTracks: {
-    overflow: 'hidden',
-  },
-  relatedArtist: {
-    borderRadius: '50%',
-  },
   grid: {
     display: 'grid',
     gridGap: '50px 10%',
@@ -51,36 +18,37 @@ const useStyles = makeStyles((theme) => ({
       gridTemplateColumns: 'repeat(3, 1fr)',
     },
   },
-  paginationSection: {
-    display: 'flex',
-    justifyContent: 'center',
-    alignItems: 'center',
-    marginBottom: 20,
-  },
-  pagination: {
-    '& button': {
-      fontSize: 20,
-      fontWeight: 500,
-    },
-  },
 }))
 
-const Artist = (props) => {
+const Artist = () => {
   const classes = useStyles()
+  const dispatch = useDispatch()
   const { id } = useParams()
   const {
-    fetchRelatedArtists,
+    loading,
+    data: artist,
     relatedArtists,
-  } = props
+  } = useSelector((store) => store.artist)
+
+  const fetchArtist = useCallback((_id) => {
+    dispatch(actions.fetchArtist(_id))
+  }, [dispatch])
+
+  const fetchRelatedArtists = useCallback((_id) => {
+    dispatch(actions.fetchRelatedArtists(_id))
+  }, [dispatch])
+
   useEffect(() => {
     fetchRelatedArtists(id)
-  }, [
-    fetchRelatedArtists,
-    id,
-  ])
+  }, [fetchRelatedArtists, id])
 
   return (
-    <PageWrapper imageToBackground {...props}>
+    <ArtistLayout
+      imageToBackground
+      loading={loading}
+      artist={artist}
+      fetchArtist={fetchArtist}
+    >
       <div className={classes.grid}>
         {relatedArtists.map((_artist) => (
           <HoverableCard
@@ -91,7 +59,7 @@ const Artist = (props) => {
           />
         ))}
       </div>
-    </PageWrapper>
+    </ArtistLayout>
   )
 }
 

@@ -1,5 +1,5 @@
-import { createSlice } from '@reduxjs/toolkit'
-import { fetchAlbum } from '../actions/album'
+import { createSlice, createAsyncThunk } from '@reduxjs/toolkit'
+import api from '../../api/spotify'
 
 const initialState = {
   loading: false,
@@ -11,6 +11,14 @@ const initialState = {
   },
   hasErrors: false,
 }
+
+export const fetchAlbum = createAsyncThunk(
+  'album/fetch',
+  async (id = '') => {
+    const resp = await api.fetchAlbum(id)
+    return resp.data
+  },
+)
 
 const albumSlice = createSlice({
   name: 'album',

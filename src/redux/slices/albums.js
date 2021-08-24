@@ -1,5 +1,5 @@
 import { createSlice, createAsyncThunk } from '@reduxjs/toolkit'
-import { getApi } from '../../../config'
+import api from '../../api/spotify'
 
 const initialState = {
   loading: false,
@@ -12,7 +12,7 @@ const initialState = {
 export const fetchAlbums = createAsyncThunk(
   'albums/fetch',
   async (searchStr = '') => {
-    const resp = await getApi().fetchAlbums(searchStr)
+    const resp = await api.fetchAlbums(searchStr)
     return resp.data
   },
 )

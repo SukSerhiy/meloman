@@ -1,9 +1,9 @@
 import React, { useEffect, useCallback } from 'react'
 import { useSelector, useDispatch } from 'react-redux'
 import SearchPage from '../../shared/SearchPage'
-import * as actions from './albumsSlice'
-import ListItem from './components/ListItem'
+import * as actions from '../../../redux/slices/albums'
 import Vinil from '../../../assets/videos/vinil.mp4'
+import ListItem from './components/ListItem'
 
 const Albums = () => {
   const dispatch = useDispatch()

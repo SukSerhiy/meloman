@@ -1,6 +1,6 @@
 import React, { useEffect, useCallback } from 'react'
 import { useSelector, useDispatch } from 'react-redux'
-import * as actions from './artistsSlice'
+import * as actions from '../../../redux/slices/artists'
 import SearchPage from '../../shared/SearchPage'
 import ListItem from './components/ListItem'
 import BandVideo from '../../../assets/videos/band-playing.mp4'

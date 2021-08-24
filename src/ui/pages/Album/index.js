@@ -4,7 +4,7 @@ import { useParams, Link } from 'react-router-dom'
 import { makeStyles } from '@material-ui/core/styles'
 import TracksGroup from '../../shared/TracksGroup'
 import SpotifyLink from '../../shared/SpotifyLink'
-import * as actions from './albumSlice'
+import * as actions from '../../../redux/slices/album'
 
 const useStyles = makeStyles((theme) => ({
   root: {
