@@ -82,7 +82,7 @@ class Api {
       })
   }
 
-  async fetchArtistTopTracks(id, market = 'UA') {
+  async fetchTopTracks(id, market = 'UA') {
     return this.axios
       .get(`/v1/artists/${id}/top-tracks?market=${market}`, {
         headers: {
@@ -110,4 +110,17 @@ class Api {
   }
 }
 
-export default Api
+const apiHost = process.env.API_HOST
+const authApiHost = process.env.API_AUTH_HOST
+// const { accessToken } = store?.getState()?.auth
+const refreshToken = process.env.REFRESH_TOKEN
+const clientKey = process.env.CLIENT_KEY
+
+const api = new Api({
+  apiHost,
+  authApiHost,
+  refreshToken,
+  clientKey,
+})
+
+export default api

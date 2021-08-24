@@ -4,11 +4,35 @@ import { Provider } from 'react-redux'
 import { PersistGate } from 'redux-persist/integration/react'
 import { createHashHistory } from 'history'
 import { syncHistoryWithStore } from 'react-router-redux'
+import storage from 'redux-persist/lib/storage'
+import thunk from 'redux-thunk'
+import { configureStore } from '@reduxjs/toolkit'
+import { persistStore, persistReducer } from 'redux-persist'
 import './index.css'
-import Routes from './components/Routes/Routes'
-import configureStore from './configureStore'
+import Routes from './ui/Routes/Routes'
 
-const { persistor, store } = configureStore()
+import rootReducer from './redux/rootReducer'
+import { onRehydrationMiddleware, jwtMiddleware } from './middleware'
+
+const persistConfig = {
+  key: 'root',
+  storage,
+  whitelist: ['auth'],
+}
+
+const persistedReducer = persistReducer(persistConfig, rootReducer)
+
+const store = configureStore({
+  reducer: persistedReducer,
+  middleware: [
+    jwtMiddleware,
+    onRehydrationMiddleware,
+    thunk,
+  ],
+  devTools: true,
+})
+
+const persistor = persistStore(store)
 
 const hashHistory = createHashHistory()
 
