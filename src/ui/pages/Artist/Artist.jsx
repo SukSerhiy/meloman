@@ -8,11 +8,11 @@ import { Button } from '@material-ui/core'
 import * as actions from '@redux/slices/artist'
 import TracksGroup from 'ui/shared/TracksGroup'
 import GenreTags from 'ui/shared/GenreTags'
-import AlbumItem from 'ui/shared/AlbumItem'
 import HoverableCard from 'ui/shared/HoverableCard'
 import Slider from 'ui/shared/Slider'
 import SectionTitle from './shared/SectionTitle'
 import ArtistLayout from './shared/ArtistLayout'
+import AlbumItem from './components/AlbumItem'
 import useStyles from './styles'
 
 const Artist = () => {

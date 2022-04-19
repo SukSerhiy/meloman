@@ -8,7 +8,7 @@ const useStyles = makeStyles({
     boxShadow: '0px 4px 22px white',
   },
   mainContent: {
-    padding: '15px 1.5%',
+    padding: '10px 1.5%',
     backgroundColor: '#565a8a',
     display: 'flex',
     alignItems: 'center',

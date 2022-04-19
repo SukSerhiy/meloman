@@ -3,11 +3,12 @@ import Track from 'ui/shared/Track'
 import { TRACK_STATUSES } from '../constants'
 
 const TracksGroup = (props) => {
-  const { tracks } = props
+  const { tracks, ...rest } = props
   const [currentTrack, setCurrentTrack] = useState({
     id: null,
     status: null,
   })
+
   const handlePlay = (id) => {
     if (currentTrack.id === id) {
       setCurrentTrack({
@@ -24,6 +25,7 @@ const TracksGroup = (props) => {
       })
     }
   }
+
   const handleEnd = (id) => {
     setCurrentTrack({
       ...currentTrack,
@@ -31,8 +33,10 @@ const TracksGroup = (props) => {
       status: currentTrack.status === TRACK_STATUSES.COMPLETED,
     })
   }
+
   useEffect(() => {
   }, [currentTrack])
+
   return (
     <>
       {tracks.map((track) => (
@@ -43,6 +47,7 @@ const TracksGroup = (props) => {
           onPlay={handlePlay}
           onEnd={handleEnd}
           album={props.album}
+          {...rest}
         />
       ))}
     </>

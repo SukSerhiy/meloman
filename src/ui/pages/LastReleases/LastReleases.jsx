@@ -1,9 +1,9 @@
 import React, { useEffect, useCallback } from 'react'
 import { useSelector, useDispatch } from 'react-redux'
 import { Typography } from '@material-ui/core'
-import AlbumItem from 'ui/shared/AlbumItem'
 import Paginaton from 'ui/shared/Pagination'
 import * as actions from '@redux/slices/lastReleases'
+import AlbumItem from './components/AlbumItem'
 import useStyles from './styles'
 
 const LastReleases = () => {

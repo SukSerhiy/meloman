@@ -1,11 +1,12 @@
 import React, { useEffect, useCallback } from 'react'
 import { useSelector, useDispatch } from 'react-redux'
 import { useParams } from 'react-router-dom'
+import { Typography } from '@material-ui/core'
 import { makeStyles } from '@material-ui/core/styles'
 import * as actions from '@redux/slices/artist'
-import AlbumItem from 'ui/shared/AlbumItem'
-import Pagination from '../../../../shared/Pagination'
-import ArtistLayout from '../../shared/ArtistLayout'
+import Pagination from 'ui/shared/Pagination'
+import ArtistLayout from 'ui/pages/Artist/shared/ArtistLayout'
+import AlbumItem from '../AlbumItem'
 
 const LIMIT = 21
 
@@ -90,6 +91,9 @@ const Artist = () => {
       artist={artist}
       fetchArtist={fetchArtist}
     >
+      <Typography variant="h4">
+        Releases
+      </Typography>
       <div className={classes.grid}>
         {items.map((album) => (
           <AlbumItem

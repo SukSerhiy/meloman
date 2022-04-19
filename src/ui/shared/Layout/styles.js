@@ -1,6 +1,6 @@
 const styles = {
   main: {
-    height: 'calc(100% - 60px)',
+    height: `100vh`,
   },
 }
 

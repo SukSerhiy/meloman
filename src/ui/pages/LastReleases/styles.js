@@ -2,9 +2,9 @@ import { makeStyles } from '@material-ui/core/styles'
 
 const useStyles = makeStyles((theme) => ({
   root: {
-    padding: '0px 3%',
+    padding: '10px 3%',
     [theme.breakpoints.up('lg')]: {
-      padding: '0px 14%',
+      padding: '10px 14%',
     },
   },
   grid: {

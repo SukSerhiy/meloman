@@ -1,5 +1,6 @@
 import React, { useEffect } from 'react'
 import PropTypes from 'prop-types'
+import { Typography } from '@material-ui/core'
 import { makeStyles } from '@material-ui/core/styles'
 import { useHistory } from 'react-router-dom'
 import SearchInput from './components/SearchInput'
@@ -28,19 +29,19 @@ const SearchPage = ({
           <video className={classes.bgVideo} src={videoBgSrc} autoPlay loop muted />
         </div>
       )}
-      <h2 className={classes.h2}>{title}</h2>
+      <Typography variant="h4" className={classes.title}>
+        {title}
+      </Typography>
       <SearchInput
         onSearch={onFetch}
       />
-      {/* <ProgressWrapper loading={loading}> */}
-        <div className={classes.list}>
-          {items.map((item) => (
-            <div className={classes.listItem} key={items.id}>
-              {renderListItem(item)}
-            </div>
-          ))}
-        </div>
-      {/* </ProgressWrapper> */}
+      <div className={classes.list}>
+        {items.map((item) => (
+          <div className={classes.listItem} key={items.id}>
+            {renderListItem(item)}
+          </div>
+        ))}
+      </div>
     </div>
   )
 }

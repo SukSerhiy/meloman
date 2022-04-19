@@ -28,7 +28,7 @@ const useStyles = makeStyles((theme) => ({
       top: '-100%',
       width: '100%',
       left: 0,
-      height: '20vh',
+      height: 'auto'
     },
   },
   menuActive: {

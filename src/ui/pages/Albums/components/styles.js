@@ -36,10 +36,6 @@ const useStyles = makeStyles({
     flexDirection: 'column',
     marginTop: 10,
   },
-  linkWrapper: {
-    display: 'flex',
-    alignItems: 'center',
-  },
   artist: {
     fontWeight: 'bold',
     color: '#483b03',

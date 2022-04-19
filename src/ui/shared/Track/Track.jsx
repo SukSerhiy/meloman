@@ -126,6 +126,7 @@ class Track extends Component {
       track,
       currentTrack,
       onPlay,
+      showOnlyTitle
     } = this.props
     const { currentTime, volume, isVolumeShown } = this.state
     const muted = volume === 0
@@ -162,7 +163,9 @@ class Track extends Component {
         </div>
         <div className={classes.content}>
           <div className={classes.titleBlock}>
-            <img className={classes.albumCover} src={albumCover} alt="cover" />
+            {!showOnlyTitle && (
+              <img className={classes.albumCover} src={albumCover} alt="cover" />
+            )}
             <span className={classes.titleText}>
               {track.name}
             </span>
@@ -220,22 +223,26 @@ class Track extends Component {
                 </div>
               </div>
           )}
-          <div>
+          {!showOnlyTitle && (
             <div className={classes.albumBlock}>
               <Link className={classes.albumName} to={`/albums/${album.id}`} target="__blank">
                 {album.name}
               </Link>
               <span className={classes.releaseDate}>
                 {album.release_date && getReleaseDate(
-                  album.release_date, album.release_date_precision,
+                  album.release_date, 'year',
                 )}
               </span>
             </div>
-          </div>
+          )}
         </div>
       </div>
     )
   }
+}
+
+Track.defaultProps = {
+  showOnlyTitle: false
 }
 
 Track.propTypes = {
@@ -263,6 +270,7 @@ Track.propTypes = {
   }).isRequired,
   onPlay: PropTypes.func.isRequired,
   onEnd: PropTypes.func.isRequired,
+  showOnlyTitle: PropTypes.bool
 }
 
 export default withStyles(styles)(Track)

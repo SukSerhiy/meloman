@@ -24,6 +24,17 @@ const useStyles = makeStyles((theme) => ({
       alignItems: 'center',
     },
   },
+  realiseDateContainer: {
+    display: 'flex',
+    alignItems: 'center',
+  },
+  realiseDate: {
+    padding: '10px 0px',
+    fontWeight: 'bold'
+  },
+  calendarIcon: {
+    marginRight: 10,
+  },
   coverImg: {
     [theme.breakpoints.down('xs')]: {
       display: 'block',
@@ -43,6 +54,7 @@ const useStyles = makeStyles((theme) => ({
     transition: 'color 0.3s ease 0s',
     '&:hover': {
       color: '#b18a42',
+      textDecoration: 'underline',
     },
   },
 }))

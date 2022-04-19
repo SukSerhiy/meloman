@@ -10,7 +10,11 @@ const SideMenu = () => {
   const classes = useStyles()
   const [isActive, setIsActive] = useState(false)
 
-  const handleClick = (e) => {
+  const handleOpenClick = () => {
+    setIsActive((prev) => !prev)
+  }
+
+  const handleAnyClick = (e) => {
     const { path } = e
     const navElement = path.find(((p) => p.id === 'nav-menu'))
     if (!navElement) {
@@ -18,10 +22,14 @@ const SideMenu = () => {
     }
   }
 
+  const handleMenuItemClick = () => {
+    setIsActive(false)
+  }
+
   useEffect(() => {
-    window.addEventListener('click', handleClick)
+    window.addEventListener('click', handleAnyClick)
     return () => {
-      window.removeEventListener('click', handleClick)
+      window.removeEventListener('click', handleAnyClick)
     }
   }, [])
 
@@ -29,7 +37,7 @@ const SideMenu = () => {
     <div id="nav-menu">
       <IconButton
         className={classes.menuIconBtn}
-        onClick={() => setIsActive((prev) => !prev)}
+        onClick={handleOpenClick}
       >
         <MenuIcon className={classes.menuIcon} />
       </IconButton>
@@ -41,6 +49,8 @@ const SideMenu = () => {
               className={classes.link}
               activeClassName={classes.activeLink}
               to={l.to}
+              exact={!!l.exact}
+              onClick={handleMenuItemClick}
             >
               {l.label}
             </NavLink>

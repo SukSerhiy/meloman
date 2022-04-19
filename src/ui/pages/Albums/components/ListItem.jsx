@@ -13,11 +13,11 @@ const AlbumListItem = ({ item }) => {
     artists = [],
     release_date: releaseDate,
     release_date_precision: releaseDatePrecision,
-    external_urls: externalUrls,
   } = item
   const avatar = (item.images.find((img) => img.width >= 100) || item.images[0])?.url
   return (
     <Link
+      // @TODO: Dictionary for routes
       to={`/albums/${id}`}
       className={classes.root}
     >
@@ -30,10 +30,7 @@ const AlbumListItem = ({ item }) => {
         }}
       />
       <div className={classes.mainContent}>
-        <div className={classes.linkWrapper}>
-          <span className={classes.title}>{name}</span>
-          <SpotifyLink spotifyUrl={externalUrls?.spotify} />
-        </div>
+        <span className={classes.title}>{name}</span>
         <div className={classes.bottomSection}>
           {artists.map((artist) => {
             const spotifyUrl = artist?.external_urls?.spotify
@@ -41,11 +38,11 @@ const AlbumListItem = ({ item }) => {
               <div className={classes.linkWrapper} key={artist.id}>
                 <Link
                   className={classes.artist}
+                  // @TODO: Dictionary for routes
                   to={`/artists/${artist.id}`}
                 >
                   <span>{artist.name}</span>
                 </Link>
-                <SpotifyLink spotifyUrl={spotifyUrl} />
               </div>
             )
           })}

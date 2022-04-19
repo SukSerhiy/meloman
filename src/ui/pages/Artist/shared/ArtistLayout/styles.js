@@ -6,10 +6,8 @@ export default makeStyles((theme) => ({
     minHeight: '100%',
     position: 'relative',
     backgroundColor: '#eedbc2',
-    backgroundBlendMode: 'overlay',
-  },
-  contentHeader: {
-    textAlign: 'center',
+    backgroundSize: 'cover',
+    backgroundBlendMode: 'screen',
   },
   avatar: {
     margin: '0 auto',
@@ -19,6 +17,15 @@ export default makeStyles((theme) => ({
       height: 640,
     },
   },
+  titleContainer: {
+    display: 'flex',
+    justifyContent: 'center',
+    alignItems: 'center',
+    [theme.breakpoints.up('md')]: {
+      position: 'relative',
+      bottom: 70
+    },
+  },
   title: {
     margin: 0,
     wordBreak: 'break-all',
@@ -26,8 +33,9 @@ export default makeStyles((theme) => ({
     padding: '10px 0px',
     position: 'relative',
     display: 'inline-block',
+    wordBreak: 'normal',
     [theme.breakpoints.up('md')]: {
-      bottom: 70,
+      marginLeft: 40,
       fontSize: '8m',
       borderRadius: '50%',
       backgroundImage: 'radial-gradient(ellipse at center, #0000008a 0, transparent 100%)',

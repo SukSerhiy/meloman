@@ -1,6 +1,7 @@
 import React, { useEffect } from 'react'
 import { useParams } from 'react-router-dom'
 import LazyImage from 'ui/shared/LazyImage'
+import SpotifyLink from 'ui/shared/SpotifyLink'
 import useStyles from './styles'
 
 const ArtistLayout = ({
@@ -21,13 +22,14 @@ const ArtistLayout = ({
     <div
       className={classes.root}
       style={{
-        backgroundImage: `url(${imageUrl}), linear-gradient(90deg, #c6c6c6, #292929 25%, #292929 75%, #c6c6c6)`,
+        backgroundImage: `url(${imageUrl})`,
       }}
     >
-      <section className={classes.contentHeader}>
         <LazyImage src={imageUrl} className={classes.avatar} alt="artist" />
-        <h2 className={classes.title}>{artist.name}</h2>
-      </section>
+        <div className={classes.titleContainer}>
+          <h2 className={classes.title}>{artist.name}</h2>
+          <SpotifyLink spotifyUrl={artist?.external_urls?.spotify} />
+        </div>
       {children}
     </div>
   )

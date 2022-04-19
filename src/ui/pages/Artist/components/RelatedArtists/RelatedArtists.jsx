@@ -1,9 +1,10 @@
 import React, { useEffect, useCallback } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { useParams } from 'react-router-dom';
+import { Typography } from '@material-ui/core'
 import * as actions from '@redux/slices/artist';
 import HoverableCard from 'ui/shared/HoverableCard';
-import ArtistLayout from 'ui/shared/ArtistLayout';
+import ArtistLayout from '../../shared/ArtistLayout';
 import useStyles from './styles';
 
 const Artist = () => {
@@ -35,6 +36,9 @@ const Artist = () => {
       artist={artist}
       fetchArtist={fetchArtist}
     >
+      <Typography variant="h4">
+        Related artists
+      </Typography>
       <div className={classes.grid}>
         {relatedArtists.map((_artist) => (
           <HoverableCard

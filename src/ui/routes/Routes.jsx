@@ -9,7 +9,7 @@ import Artists from 'ui/pages/Artists'
 import Artist from 'ui/pages/Artist'
 import Album from 'ui/pages/Album'
 import ArtistAlbums from 'ui/pages/Artist/components/Albums'
-// import RelatedArtists from 'ui/pages/Artist/components/RelatedArtists'
+import RelatedArtists from 'ui/pages/Artist/components/RelatedArtists'
 import LayoutRoute from './LayoutRoute'
 
 const App = ({ history }) => (
@@ -18,7 +18,7 @@ const App = ({ history }) => (
       <LayoutRoute path="/albums/:id" component={Album} />
       <LayoutRoute path="/albums" component={Albums} />
       <LayoutRoute path="/artists/:id/albums" component={ArtistAlbums} />
-      {/* <LayoutRoute path="/artists/:id/related" component={RelatedArtists} /> */}
+      <LayoutRoute path="/artists/:id/related" component={RelatedArtists} />
       <LayoutRoute path="/artists/:id" component={Artist} />
       <LayoutRoute path="/artists" component={Artists} />
       <LayoutRoute path="/" component={LastReleases} />

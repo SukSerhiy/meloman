@@ -25,7 +25,7 @@ const useStyles = makeStyles((theme) => ({
     background: '#232a34',
     opacity: 0.2,
   },
-  h2: {
+  title: {
     textAlign: 'center',
   },
   list: {
