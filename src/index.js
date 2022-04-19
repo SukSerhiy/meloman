@@ -9,7 +9,7 @@ import thunk from 'redux-thunk'
 import { configureStore } from '@reduxjs/toolkit'
 import { persistStore, persistReducer } from 'redux-persist'
 import './index.css'
-import Routes from './ui/Routes/Routes'
+import Routes from './ui/routes'
 
 import rootReducer from './redux/rootReducer'
 import { onRehydrationMiddleware, jwtMiddleware } from './middleware'

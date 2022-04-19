@@ -1,4 +1,4 @@
-import api from '../api/spotify'
+import api from 'api/spotify'
 
 const onRehydration = () => (next) => (action) => {
   if (action.type === 'persist/REHYDRATE') {

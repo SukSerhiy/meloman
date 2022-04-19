@@ -4,17 +4,19 @@ const HtmlWebpackPlugin = require('html-webpack-plugin')
 const { CleanWebpackPlugin } = require('clean-webpack-plugin')
 
 module.exports = {
-  entry: './src/index.js',
+  entry: {
+    bundle: path.resolve(__dirname, 'src/index.js'),
+  },
   mode: 'development',
   output: {
-    filename: './bundle.js',
-    publicPath: '/',
+    path: path.resolve(__dirname, 'dist'),
+    filename: './[name][contenthash].js',
   },
   module: {
     rules: [
       {
-        test: /\.m?js$/,
-        exclude: /(node_modules|bower_components)/,
+        test: /\.(js|jsx)$/,
+        exclude: /node_modules/,
         use: {
           loader: 'babel-loader',
         },
@@ -59,12 +61,23 @@ module.exports = {
     }),
   ],
   devServer: {
-    contentBase: path.join(__dirname, 'dist'),
+    contentBase: path.resolve(__dirname, 'dist'),
     compress: true,
     port: 3000,
     watchContentBase: true,
     progress: true,
     open: true,
+    hot: true,
   },
   devtool: 'source-map',
+  resolve: {
+    alias: {
+      ui: path.resolve(__dirname, 'src/ui'),
+      utils: path.resolve(__dirname, 'src/utils'),
+      assets: path.resolve(__dirname, 'src/assets'),
+      api: path.resolve(__dirname, 'src/api'),
+      '@redux': path.resolve(__dirname, 'src/redux'),
+    },
+    extensions: ['.js', '.jsx']
+  },
 }

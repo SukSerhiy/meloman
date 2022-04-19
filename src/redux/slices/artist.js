@@ -73,13 +73,13 @@ const artistSlice = createSlice({
       state.hasErrors = false
     })
     builder.addMatcher(
-      (action) => action.type.startsWith('artist/') && action.type.endsWith('/pending'),
+      (action) => /^artist\/\w+\/pending$/.test(action.type),
       (state) => {
         state.loading = true
       },
     )
     builder.addMatcher(
-      (action) => action.type.startsWith('artist/') && action.type.endsWith('/rejected'),
+      (action) => /^artist\/\w+\/rejected$/.test(action.type),
       (state) => {
         state.loading = false
         state.hasErrors = true

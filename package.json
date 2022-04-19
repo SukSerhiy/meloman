@@ -16,36 +16,27 @@
     "prop-types": "^15.7.2",
     "react": "^16.14.0",
     "react-dom": "^16.14.0",
-    "react-lazyload": "^3.2.0",
     "react-redux": "^7.2.2",
     "react-router": "^5.2.0",
     "react-router-dom": "^5.2.0",
     "react-router-redux": "^4.0.8",
-    "react-scripts": "4.0.0",
+    "react-scripts": "^5.0.1",
     "react-slick": "^0.27.13",
     "react-transition-group": "^4.4.1",
     "redux": "^4.0.5",
     "redux-devtools-extension": "^2.13.8",
+    "redux-logger": "^3.0.6",
     "redux-persist": "^6.0.0",
     "redux-thunk": "^2.3.0",
     "slick-carousel": "^1.8.1",
     "swiper": "^6.8.1",
-    "web-vitals": "^0.2.4",
-    "redux-logger": "^3.0.6"
+    "web-vitals": "^0.2.4"
   },
   "scripts": {
     "start": "webpack serve",
     "dev": "webpack --mode=development",
     "dev:watch": "webpack --mode=development --watch",
-    "build": "webpack --mode=production",
-    "test": "jest --config ./jest.config.json",
-    "test:watch": "npm run test -- --watch"
-  },
-  "eslintConfig": {
-    "extends": [
-      "react-app",
-      "react-app/jest"
-    ]
+    "build": "webpack --mode=production"
   },
   "browserslist": {
     "production": [
@@ -94,6 +85,6 @@
     "webpack": "^5.10.0",
     "webpack-cli": "^4.2.0",
     "webpack-dev-server": "^3.11.0",
-    "webpack-serve": "^3.2.0"
+    "webpack-serve": "^4.0.0"
   }
 }

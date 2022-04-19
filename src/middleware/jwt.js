@@ -7,7 +7,7 @@ let isTokenRefreshed = false
 
 const jwt = (store) => (next) => async (action) => {
   const { dispatch } = store
-  const isError = action.type?.endsWith('/rejected') && action?.type !== 'global/SET_ERROR'
+  const isError = action.type?.endsWith('/rejected')
   actionsBuffer.push(action)
   if (isError) {
     const isUnauthorized = action?.error?.message === 'Request failed with status code 401'

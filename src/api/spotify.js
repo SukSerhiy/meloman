@@ -37,7 +37,7 @@ class Api {
   }
 
   async fetchLastReleases(options = {}) {
-    const { offset = 0, limit = 20 } = options
+    const { offset = 0, limit = 21 } = options
     return this.axios
       .get(`/v1/browse/new-releases?offset=${offset}&limit=${limit}`, {
         headers: {
