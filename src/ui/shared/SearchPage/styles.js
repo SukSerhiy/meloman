@@ -2,14 +2,14 @@ import { makeStyles } from '@material-ui/core/styles'
 
 const useStyles = makeStyles((theme) => ({
   root: {
-    height: '100vh',
-    padding: '0 3%',
+    height: '100%',
+    boxSizing: 'border-box',
+    padding: '20px 3%',
     [theme.breakpoints.up('lg')]: {
-      padding: '0px 10%',
+      padding: '100px 10% 30px 10%',
     },
     margin: 'auto 0',
     position: 'relative',
-    top: '20%',
   },
   background: {
     height: '100%',

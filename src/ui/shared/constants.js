@@ -3,3 +3,5 @@ export const TRACK_STATUSES = {
   PAUSED: 'PAUSED',
   COMPLETED: 'COMPLETED',
 }
+
+export const HEADER_HEIGHT = 74
