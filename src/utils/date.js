@@ -5,6 +5,5 @@ export const getReleaseDate = (releaseDate, precision) => {
   if (precision === 'year') {
     format = 'YYYY'
   }
-  console.log('---releaseDate', releaseDate)
   return moment(releaseDate, "YYYY-MM-DD").format(format);
 }

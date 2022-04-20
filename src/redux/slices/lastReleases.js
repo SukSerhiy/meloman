@@ -12,15 +12,15 @@ const initialState = {
 export const fetchLastReleases = createAsyncThunk(
   'lastReleases/fetch',
   async ({ offset = 0, limit = 21 } = {}, thunkAPI) => {
-    try {
-      thunkAPI.dispatch(toggleLoading())
+    // try {
+      // thunkAPI.dispatch(toggleLoading())
       const resp = await api.fetchLastReleases({ offset, limit })
-      thunkAPI.dispatch(toggleLoading())
+      // thunkAPI.dispatch(toggleLoading())
       return resp.data
-    } catch (err) {
-      thunkAPI.dispatch(toggleLoading())
-      throw err
-    }
+    // } catch (err) {
+    //   thunkAPI.dispatch(toggleLoading())
+    //   throw err
+    // }
   },
 )
 
