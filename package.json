@@ -28,8 +28,6 @@
   },
   "scripts": {
     "start": "webpack serve",
-    "dev": "webpack --mode=development",
-    "dev:watch": "webpack --mode=development --watch",
     "build": "webpack --mode=production",
     "test": "jest"
   },
