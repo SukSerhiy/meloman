@@ -11,7 +11,7 @@ import { persistStore, persistReducer } from 'redux-persist'
 import Routes from 'ui/routes'
 import './styles.css'
 
-import rootReducer from './redux/rootReducer'
+import rootReducer from '@redux/rootReducer'
 import { onRehydrationMiddleware, jwtMiddleware } from './middleware'
 
 const persistConfig = {

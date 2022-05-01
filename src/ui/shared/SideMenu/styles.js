@@ -15,8 +15,6 @@ const useStyles = makeStyles((theme) => ({
     position: 'absolute',
     opacity: 0,
     backgroundColor: '#565a8a',
-    display: 'flex',
-    flexDirection: 'column',
     transition: 'all 0.3s ease',
     [theme.breakpoints.up('sm')]: {
       paddingTop: 20,
@@ -30,8 +28,10 @@ const useStyles = makeStyles((theme) => ({
       left: 0,
       height: 'auto'
     },
+    display: 'none'
   },
   menuActive: {
+    display: 'block',
     opacity: 1,
     [theme.breakpoints.up('sm')]: {
       left: 0,
@@ -51,11 +51,20 @@ const useStyles = makeStyles((theme) => ({
     fontWeight: 700,
     textDecoration: 'none',
     letterSpacing: '1px',
-    marginLeft: 10,
+    marginLeft: 10
   },
   activeLink: {
     color: 'yellow',
   },
+
+
+
+  noPanel: {
+    display: 'none',
+  },
+  activePanel: {
+    display: 'block'
+  }
 }))
 
 export default useStyles

@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react'
+import { useState, useEffect } from 'react'
 import clsx from 'clsx'
 import { NavLink } from 'react-router-dom'
 import { IconButton } from '@material-ui/core'
@@ -15,7 +15,7 @@ const SideMenu = () => {
   }
 
   const handleAnyClick = (e) => {
-    const { path } = e
+    const path = e.path || (e.composedPath && e.composedPath());
     const navElement = path.find(((p) => p.id === 'nav-menu'))
     if (!navElement) {
       setIsActive(false)
@@ -36,18 +36,22 @@ const SideMenu = () => {
   return (
     <div id="nav-menu">
       <IconButton
+        data-testid="nav-button"
         className={classes.menuIconBtn}
         onClick={handleOpenClick}
       >
         <MenuIcon className={classes.menuIcon} />
       </IconButton>
-      <nav className={clsx(classes.menu, isActive ? classes.menuActive : '')}>
+      <nav
+        data-testid="nav-panel"
+        className={clsx(classes.menu, isActive ? classes.menuActive : '')}>
         {routeLinks.map((l) => (
           <div className={classes.item} key={l.to}>
             {l.icon}
             <NavLink
               className={classes.link}
               activeClassName={classes.activeLink}
+              // activeClassName={'AAAAAAAAAAAAAAAAAAAAAAAAAAAA'}
               to={l.to}
               exact={!!l.exact}
               onClick={handleMenuItemClick}

@@ -52,7 +52,6 @@ module.exports = {
       template: './public/index.html',
       filename: 'index.html',
       favicon: './public/favicon.png',
-
     }),
     new CleanWebpackPlugin(),
     new Dotenv({
@@ -61,11 +60,11 @@ module.exports = {
     }),
   ],
   devServer: {
-    contentBase: path.resolve(__dirname, 'dist'),
+    // contentBase: path.resolve(__dirname, 'dist'),
     compress: true,
     port: 3000,
-    watchContentBase: true,
-    progress: true,
+    // watchContentBase: true,
+    // progress: true,
     open: true,
     hot: true,
   },
