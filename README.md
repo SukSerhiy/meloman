@@ -12,7 +12,7 @@ The following use cases are implemented:
 * Open artist page with artist info including top tracks, albums and related artists
 * Separate pages for albums and related artist of a particular artsit
 
-###### [You can check out all of this staff here :point_right:](https://ecstatic-neumann-a58306.netlify.app/#/)
+#### [You can check out all of this staff here :point_right:](https://ecstatic-neumann-a58306.netlify.app/#/)
 
 Made using following technologies and libraries: [React](https://ru.reactjs.org/), [Redux](https://redux.js.org/), [axios](https://github.com/axios/axios), [redux-thunk](https://github.com/reduxjs/redux-thunk), [react-testing-library](https://testing-library.com/docs/react-testing-library/intro/), [jest](https://jestjs.io/)
 
