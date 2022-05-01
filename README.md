@@ -1,4 +1,4 @@
-# [Meloman :notes::headphones:](https://ecstatic-neumann-a58306.netlify.app/#/)
+# [Meloman :notes: :headphones:](https://ecstatic-neumann-a58306.netlify.app/#/)
 
 A simple portfolio for muusic searching.
 
