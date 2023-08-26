@@ -12,7 +12,7 @@ export const ROUTES = {
   albums: '/albums',
   album: '/albums/:id',
   artists: '/artists',
-  artist: 'artists/:id',
+  artist: '/artists/:id',
   artistAlbums: '/artists/:id/albums',
   artistRelated: '/artists/:id/related'
 }
