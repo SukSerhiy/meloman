@@ -6,13 +6,11 @@ const useStyles = makeStyles({
     position: 'fixed',
     top: '0px',
     zIndex: 2,
-    boxShadow: '0px 4px 22px white',
-    backgroundColor: '#565a8a',
+    background: 'var(--clr-bg-card)',
     height: HEADER_HEIGHT,
     width: '100%'
   },
   mainContent: {
-    // padding: '0px 1.5%',
     height: '100%',
     display: 'flex',
     alignItems: 'center',
@@ -21,7 +19,7 @@ const useStyles = makeStyles({
     fontSize: 30,
     letterSpacing: 2,
     fontWeight: 'bold',
-    color: '#fff',
+    color: 'var(--clr-text-light)',
     textDecoration: 'none',
   },
 })

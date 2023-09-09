@@ -1,39 +1,47 @@
-import { makeStyles } from '@material-ui/core/styles'
+import { red } from "@material-ui/core/colors";
+import { makeStyles } from "@material-ui/core/styles";
 
 const useStyles = makeStyles({
   root: {
-    padding: '20px 30px',
-    position: 'relative',
+    padding: "20px 30px",
+    position: "relative",
     borderRadius: 10,
-    backgroundColor: '#5c68a9',
-    display: 'flex',
-    flexDirection: 'column',
-    justifyContent: 'center',
-    alignItems: 'center',
-    textDecoration: 'none',
-    transition: 'all 0.1s ease 0s',
-    '&._hover': {
-      transform: 'scale(1.009)',
+    backgroundColor: "var(--clr-bg-card)",
+    display: "flex",
+    flexDirection: "column",
+    justifyContent: "center",
+    alignItems: "center",
+    textDecoration: "none",
+    transition: 'all .4s ease',
+    gap: 10,
+    "&:hover": {
+      backgroundColor: "#0c488e",
+      "& $avatar": {
+        transform: 'scale(1.1)',
+      },
     },
   },
-  avatar: {
-    width: '100%',
+  imgContainer: {
     borderRadius: 10,
-    objectFit: 'cover',
+    overflow: "hidden",
+  },
+  avatar: {
+    height: "100%",
+    borderRadius: 10,
+    objectFit: "cover",
+    transition: 'transform .4s ease',
   },
   title: {
     fontSize: 20,
-    fontWeight: 'bold',
-    color: '#ffff',
-    textAlign: 'center',
-    margin: '10px 0px 0px 0px',
+    fontWeight: "bold",
+    color: "#ffff",
+    textAlign: "center",
   },
   subtitle: {
     fontSize: 16,
-    color: 'lightgrey',
-    textAlign: 'center',
-    margin: '10px 0px 0px 0px',
+    color: "lightgrey",
+    textAlign: "center",
   },
-})
+});
 
 export default useStyles;

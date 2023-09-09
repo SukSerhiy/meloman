@@ -19,7 +19,7 @@
 }
 
 html, body {
-  color: #483b03;
+  color: var(--clr-text-primary);
   height: 100%;
 }
 
@@ -31,4 +31,11 @@ body {
     sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+}
+
+:root {
+  --clr-bg-dark: #002856;
+  --clr-bg-card: #0c3d75;
+  --clr-text-light: #fff;
+  --clr-text-primary: #002856;
 }

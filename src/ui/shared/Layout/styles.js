@@ -7,7 +7,9 @@ const styles = {
   main: {
     position: 'relative',
     top: HEADER_HEIGHT,
-    height: `calc(100vh - ${HEADER_HEIGHT}px)`
+    minHeight: `calc(100vh - ${HEADER_HEIGHT}px)`,
+    height: `calc(100% - ${HEADER_HEIGHT}px)`,
+    backgroundColor: '#eedbc2',
   }
 }
 

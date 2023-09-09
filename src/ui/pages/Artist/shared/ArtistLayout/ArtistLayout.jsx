@@ -22,7 +22,7 @@ const ArtistLayout = ({
     <div
       className={classes.root}
       style={{
-        backgroundImage: `url(${imageUrl})`,
+        // backgroundImage: `url(${imageUrl})`,
       }}
     >
         <LazyImage src={imageUrl} className={classes.avatar} alt="artist" />
