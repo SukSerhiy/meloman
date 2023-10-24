@@ -27,6 +27,7 @@ const useStyles = makeStyles({
   },
   avatar: {
     height: "100%",
+    width: "100%",
     borderRadius: 10,
     objectFit: "cover",
     transition: 'transform .4s ease',
