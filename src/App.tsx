@@ -1,6 +1,13 @@
+import { Routes, Route } from 'react-router';
+import { Home } from './routes/index';
+import { Album } from './routes/album';
+
 function App() {
   return (
-    <div></div>
+    <Routes>
+      <Route path="/" element={<Home />} />
+      <Route path="/album/:id" element={<Album />} />
+    </Routes>
   );
 }
 

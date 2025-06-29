@@ -1,0 +1,13 @@
+{
+  "Header": {
+    "title": "Меломан"
+  },
+  "LastReleases": {
+    "title": "Останні релізи"
+  },
+  "Album": {
+    "single": "Сингл",
+    "album": "Альбом",
+    "release": "Реліз"
+  }
+}

@@ -1,0 +1,13 @@
+{
+  "Header": {
+    "title": "Meloman"
+  },
+  "LastReleases": {
+    "title": "Last releases"
+  },
+  "Album": {
+    "single": "Single",
+    "album": "Album",
+    "release": "Release"
+  }
+}
