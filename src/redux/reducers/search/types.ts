@@ -1,19 +1,18 @@
-import type { IAlbum } from "../../generalTypes";
+import type { IAlbum, IArtist, ITrack } from "../../generalTypes";
 
 export interface ISearchState {
   loading: boolean;
   albumResults: IAlbumsResults | null;
   artistsResults: IArtistsResults | null;
+  searchResults: ISearchResults | null;
 }
 
 export interface ISearchParams {
   text: string;
-  category: TSearchCategory;
+  category: string;
   offset?: number;
   limit?: number;
 }
-
-export type TSearchCategory = "artist" | "album";
 
 export interface IAlbumsResults {
   albums: {
@@ -26,14 +25,35 @@ export interface IAlbumsResults {
 
 export interface IArtistsResults {
   artists: {
-    items: IAlbum[];
+    items: IArtist[];
     offset: number;
     limit: number;
     total: number;
   };
 }
 
-export type TSearchResponse = IAlbumsResults | IArtistsResults;
+export interface ISearchResults {
+  artists?: {
+    items: IArtist[];
+    offset: number;
+    limit: number;
+    total: number;
+  };
+  albums?: {
+    items: IAlbum[];
+    offset: number;
+    limit: number;
+    total: number;
+  };
+  tracks?: {
+    items: ITrack[];
+    offset: number;
+    limit: number;
+    total: number;
+  }
+}
+
+export type TSearchResponse = ISearchResults;
 
 export function isAlbumsResults(data: TSearchResponse): data is IAlbumsResults {
   return (data as IAlbumsResults).albums !== undefined;

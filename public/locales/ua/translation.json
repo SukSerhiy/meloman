@@ -1,6 +1,14 @@
 {
   "Header": {
-    "title": "Меломан"
+    "title": "Меломан",
+    "Search": {
+      "placeholder": "Шукати...",
+      "Categories": {
+        "artist": "Виконавці",
+        "album": "Альбоми",
+        "track": "Треки"
+      }
+    }
   },
   "LastReleases": {
     "title": "Останні релізи"

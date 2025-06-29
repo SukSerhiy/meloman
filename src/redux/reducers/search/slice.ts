@@ -1,12 +1,12 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 import { api } from "services/api";
 import type { ISearchState, ISearchParams } from "./types";
-import { isAlbumsResults, isArtistsResults } from "./types";
 
 const initialState: ISearchState = {
   loading: false,
   albumResults: null,
   artistsResults: null,
+  searchResults: null,
 };
 
 export const searchByText = createAsyncThunk(
@@ -31,12 +31,13 @@ export const searchSlice = createSlice({
     });
     builder.addCase(searchByText.fulfilled, (state, { payload }) => {
       state.loading = false;
-      if (isAlbumsResults(payload)) {
-        state.albumResults = payload;
-      }
-      if (isArtistsResults(payload)) {
-        state.artistsResults = payload;
-      }
+      // if (isAlbumsResults(payload)) {
+      //   state.albumResults = payload;
+      // }
+      // if (isArtistsResults(payload)) {
+      //   state.artistsResults = payload;
+      // }
+      state.searchResults = payload;
     });
     builder.addCase(searchByText.rejected, (state) => {
       state.loading = false;

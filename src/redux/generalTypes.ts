@@ -7,7 +7,7 @@ export interface IAlbum {
     spotify?: string;
   };
   images?: Image[];
-  artists?: { name: string }[];
+  artists?: { id: string, name: string }[];
   album_type?: string;
   tracks?: {
     items: {
@@ -27,6 +27,10 @@ export interface IArtist {
   };
   genres?: string[];
   images?: Image[]
+}
+
+export interface ITrack {
+  id: number;
 }
 
 export interface Image {

@@ -1,6 +1,14 @@
 {
   "Header": {
-    "title": "Meloman"
+    "title": "Meloman",
+    "Search": {
+      "placeholder": "Search...",
+      "Categories": {
+        "artist": "Artists",
+        "album": "Albums",
+        "track": "Tracks"
+      }
+    }
   },
   "LastReleases": {
     "title": "Last releases"

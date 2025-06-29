@@ -41,7 +41,7 @@ export const Home = () => {
 
   return (
     <HomeLayout>
-      <h1>{t("LastReleases.title")}</h1>
+      <h1 className="text-2xl font-bold mb-5">{t("LastReleases.title")}</h1>
       <div className="grid grid-cols-[repeat(auto-fill,minmax(300px,1fr))] gap-4">
         {loading
           ? loadingPlug

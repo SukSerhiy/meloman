@@ -2,9 +2,8 @@
 @import "tailwindcss";
 
 @layer base {
-  p,
-  span {
-    color: var(--color-dark-brown);
+  * {
+    color: var(--color-font);
   }
 }
 
@@ -12,7 +11,9 @@
   --font-sans: "Lato", sans-serif;
   --color-primary: theme(colors.slate.400);
   --color-secondary: theme(colors.gray.200);
-  --color-dark-brown: #5c4033;
+  --color-font: #5c4033;
   --fliter-primary: brightness(0) saturate(100%) invert(91%) sepia(49%)
     saturate(2754%) hue-rotate(172deg) brightness(82%) contrast(68%);
+  --filter-font: filter: brightness(0) saturate(100%) invert(25%)
+    sepia(11%) saturate(1546%) hue-rotate(334deg) brightness(96%) contrast(92%);
 }
