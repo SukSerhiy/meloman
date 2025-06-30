@@ -3,7 +3,7 @@ import { api } from "services/api";
 import type { IAlbumState } from "./types";
 
 const initialState: IAlbumState = {
-  loading: false,
+  loading: true,
   data: null,
 };
 

@@ -7,15 +7,11 @@ export interface IAlbum {
     spotify?: string;
   };
   images?: Image[];
-  artists?: { id: string, name: string }[];
+  artists?: { id: string; name: string }[];
   album_type?: string;
   tracks?: {
-    items: {
-      name: string;
-      preview_url: string | null;
-      duration_ms: number;
-    }[]
-  }
+    items: ITrack[];
+  };
 }
 
 export interface IArtist {
@@ -26,11 +22,14 @@ export interface IArtist {
     spotify?: string;
   };
   genres?: string[];
-  images?: Image[]
+  images?: Image[];
 }
 
 export interface ITrack {
-  id: number;
+  id: string;
+  name: string;
+  preview_url: string | null;
+  duration_ms: number;
 }
 
 export interface Image {

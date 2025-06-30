@@ -7,8 +7,8 @@ import {
   getLastReleasesLoading,
   getLastReleases,
 } from "@redux/reducers/lastReleases/selectors";
-import LastReleaseItem from "components/LastReleaseItem";
 import { Pagination } from "ui/Pagination";
+import { Album } from "ui/Album";
 import { HomeLayout } from "../layout/HomeLayout";
 
 export const Home = () => {
@@ -41,11 +41,11 @@ export const Home = () => {
 
   return (
     <HomeLayout>
-      <h1 className="text-2xl font-bold mb-5">{t("LastReleases.title")}</h1>
+      <h1 className="mb-5 text-2xl font-bold">{t("LastReleases.title")}</h1>
       <div className="grid grid-cols-[repeat(auto-fill,minmax(300px,1fr))] gap-4">
         {loading
           ? loadingPlug
-          : items.map((item) => <LastReleaseItem key={item.id} item={item} />)}
+          : items.map((item) => <Album key={item.id} item={item} />)}
       </div>
       {!loading && (
         <div className="flex justify-end">

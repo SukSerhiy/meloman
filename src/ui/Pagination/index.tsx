@@ -9,7 +9,7 @@ export const Pagination: FC<IPagination> = ({
   onPageChange,
   maxToShow = 5,
 }) => {
-  const pagesCount = total / perPage;
+  const pagesCount = Math.ceil(total / perPage);
   const pagesArray = Array.from({ length: pagesCount }, (_, i) => i + 1);
 
   const showFirstDots = page > 3;

@@ -2,8 +2,8 @@ import type { FC } from "react";
 import { useTranslation } from "react-i18next";
 import useSelect from "hooks/useSelect";
 import DownIcon from "assets/icons/down.png";
-import { categories } from 'constants/index';
-import type { ICategorySelect } from './types';
+import { categories } from "constants/index";
+import type { ICategorySelect } from "./types";
 
 export const CategorySelect: FC<ICategorySelect> = ({ selected, onSelect }) => {
   const { open, setOpen, toggleOpen, triggerRef, dropRef } = useSelect();
@@ -29,7 +29,7 @@ export const CategorySelect: FC<ICategorySelect> = ({ selected, onSelect }) => {
         />
       </button>
       <div
-        className={`absolute right-0 left-0 w-full translate-y-1.5 overflow-hidden rounded-md shadow-2xl bg-gray-100 py-1 ${open ? "block" : "hidden"}`}
+        className={`absolute right-0 left-0 z-50 w-full translate-y-1.5 overflow-hidden rounded-md bg-gray-100 py-1 shadow-2xl ${open ? "block" : "hidden"}`}
         ref={dropRef}
       >
         {categories.map((item) => {
@@ -37,7 +37,7 @@ export const CategorySelect: FC<ICategorySelect> = ({ selected, onSelect }) => {
             <button
               type="button"
               key={item}
-              className="w-full cursor-pointer border- px-1 py-0.5 outline-0 hover:bg-gray-200"
+              className="border- w-full cursor-pointer px-1 py-0.5 outline-0 hover:bg-gray-200"
               onClick={() => handleSelect(item)}
             >
               {t(`Header.Search.Categories.${item}`)}

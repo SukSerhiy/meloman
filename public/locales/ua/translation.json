@@ -17,5 +17,13 @@
     "single": "Сингл",
     "album": "Альбом",
     "release": "Реліз"
+  },
+  "Artist": {
+    "top_tracks": "Топ треки",
+    "albums": "Альбоми",
+    "show_more": "Показати більше"
+  },
+  "ArtistAlbums": {
+    "albums": "Альбоми"
   }
 }

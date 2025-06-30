@@ -1,6 +1,6 @@
 import { createSelector } from '@reduxjs/toolkit';
-import type { IArtistState } from './types';
-import type { IArtist, IAlbum } from '../../generalTypes';
+import type { IArtistState, ITopTracksResponse, IArtistAlbumsResponse } from './types';
+import type { IArtist } from '../../generalTypes';
 import type { IStoreState } from '../../types';
 
 const getState = (state: IStoreState): IArtistState => state.artist;
@@ -32,15 +32,10 @@ export const getArtistData = createSelector(
 
 export const getTopTracks = createSelector(
 	[getState],
-	(state: IArtistState): any | null => state.topTracks,
+	(state: IArtistState): ITopTracksResponse | null => state.topTracks,
 );
 
 export const getArtistAlbums = createSelector(
 	[getState],
-	(state: IArtistState): any | null => state.albums,
-);
-
-export const getRelatedArtists = createSelector(
-	[getState],
-	(state: IArtistState): any | null => state.relatedArtists,
+	(state: IArtistState): IArtistAlbumsResponse | null => state.albums,
 );

@@ -14,7 +14,6 @@ const initialState: IArtistState = {
   artistData: null,
   topTracks: null,
   albums: null,
-  relatedArtists: null,
 };
 
 export const fetchArtistData = createAsyncThunk(
@@ -35,13 +34,6 @@ export const fetchArtistAlbums = createAsyncThunk(
   "artistAlbums/fetch",
   async (params: IArtistAlbumsParams) => {
     return await await api.artist.getAlbums(params);
-  },
-);
-
-export const fetchRelatedArtists = createAsyncThunk(
-  "relatedArtists/fetch",
-  async (id: string) => {
-    return await await api.artist.getRelatedArtists(id);
   },
 );
 
@@ -79,16 +71,6 @@ export const artistSlice = createSlice({
     });
     builder.addCase(fetchArtistAlbums.rejected, (state) => {
       state.albumsLoading = false;
-    });
-    builder.addCase(fetchRelatedArtists.pending, (state) => {
-      state.relatedArtistsLoading = true;
-    });
-    builder.addCase(fetchRelatedArtists.fulfilled, (state, { payload }) => {
-      state.relatedArtistsLoading = false;
-      state.relatedArtists = payload;
-    });
-    builder.addCase(fetchRelatedArtists.rejected, (state) => {
-      state.relatedArtistsLoading = false;
     });
   },
 });

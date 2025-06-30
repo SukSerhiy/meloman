@@ -1,4 +1,4 @@
-import type { IArtist, IAlbum } from '../../generalTypes';
+import type { IArtist, IAlbum, ITrack } from '../../generalTypes';
 
 export interface IArtistState {
   loading: boolean;
@@ -8,7 +8,6 @@ export interface IArtistState {
   artistData: IArtist | null;
   topTracks: ITopTracksResponse | null;
   albums: IArtistAlbumsResponse | null;
-  relatedArtists: any | null;
 }
 
 export interface ITopTracksParams {
@@ -26,14 +25,9 @@ export interface ITopTracksResponse {
   tracks: ITrack[];
 }
 
-export interface ITrack {
-  id: string;
-  name: string;
-  preview_url: string | null;
-}
-
 export interface IArtistAlbumsResponse {
   items: IAlbum[];
+  limit: number;
   offset: number;
   total: number;
 }

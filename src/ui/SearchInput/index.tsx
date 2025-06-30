@@ -65,7 +65,7 @@ export const SearchInput: FC = () => {
         />
       </div>
       <div
-        className={`bg-primary absolute right-0 left-0 h-96 max-h-80 translate-y-1 overflow-auto rounded-sm mt-1 ${open ? "block" : "hidden"}`}
+        className={`bg-primary absolute right-0 left-0 z-50 mt-1 h-96 max-h-80 translate-y-1 overflow-auto rounded-sm ${open ? "block" : "hidden"}`}
         // className="bg-primary absolute right-0 left-0 h-96 max-h-80 translate-y-1 overflow-auto rounded-sm py-1"
         ref={dropRef}
       >
@@ -81,9 +81,7 @@ export const SearchInput: FC = () => {
                     alt="avatar"
                     className="h-10 w-10 rounded-full"
                   />
-                  <span className="ml-3 text-[1.15rem] font-bold">
-                    {name}
-                  </span>
+                  <span className="ml-3 text-[1.15rem] font-bold">{name}</span>
                 </div>
               </a>
             );
