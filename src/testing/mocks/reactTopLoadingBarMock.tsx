@@ -13,7 +13,7 @@ const MockedTopLoadingBar = forwardRef((props, ref) => {
     stop: stopMock,
     complete: completeMock,
   }));
-  return <div>{TOP_LOADING_BAR_TEXT}</div>;
+  return <div data-testid="loading-bar">{TOP_LOADING_BAR_TEXT}</div>;
 });
 
 export default MockedTopLoadingBar;
