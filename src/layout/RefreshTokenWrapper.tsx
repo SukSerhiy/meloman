@@ -1,4 +1,5 @@
-import { FC, ReactNode, useState, useEffect } from "react";
+import { useState, useEffect } from "react";
+import type { FC, ReactNode } from 'react';
 import { useAppSelector, useAppDispatch } from "@redux/store";
 import * as authActions from "@redux/reducers/auth/slice";
 import {

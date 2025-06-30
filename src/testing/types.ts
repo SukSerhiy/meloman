@@ -1,4 +1,4 @@
-import { DefaultBodyType, JsonBodyType, PathParams, StrictRequest } from "msw";
+import type { DefaultBodyType, JsonBodyType, PathParams, StrictRequest } from "msw";
 
 export interface IHandlerConfigItem {
   method?: "get" | "post" | "put" | "delete";

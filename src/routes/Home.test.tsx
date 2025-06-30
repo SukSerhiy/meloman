@@ -1,6 +1,6 @@
 import { describe, it, vi, expect, beforeAll, afterEach, afterAll } from "vitest";
 import { render, screen } from "testing/utils";
-import userEvent from "@testing-library/user-event";
+// import userEvent from "@testing-library/user-event";
 import MockedTopLoadingBar from "testing/mocks/reactTopLoadingBarMock";
 // import { createServer } from "testing/server";
 import { API_HOST } from "services/http";
