@@ -85,7 +85,7 @@ export const Pagination: FC<IPagination> = ({
           )}
         </>
       )}
-      <button type="button" onClick={handleNext}>
+      <button type="button" data-testid="next-page-btn" onClick={handleNext}>
         <ChevronRight />
       </button>
     </div>
