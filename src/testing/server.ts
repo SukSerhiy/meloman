@@ -1,7 +1,7 @@
 import { setupServer } from "msw/node";
 import { http, HttpResponse } from "msw";
 import { beforeAll, afterEach, afterAll } from 'vitest';
-import { THandlerConfig } from './types';
+import type { THandlerConfig } from './types';
 
 export function createServer(handlerConfig: THandlerConfig) {
   const handlers = handlerConfig.map((config) => {

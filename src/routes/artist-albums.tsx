@@ -46,7 +46,7 @@ export const ArtistAlbums = () => {
     <>
       {Array(10)
         .fill(null)
-        .map((item, key) => (
+        .map((_item, key) => (
           <Skeleton key={key} height={349} baseColor="#cecece" />
         ))}
     </>
