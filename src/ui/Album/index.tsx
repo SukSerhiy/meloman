@@ -4,7 +4,6 @@ import type { IAlbumProps } from "./types";
 export const Album: FC<IAlbumProps> = ({ item }) => {
   const { id, name, images, artists = [] } = item;
   const srcSet = images?.map((img) => `${img.url} ${img.width}w`).join(", ");
-  console.log("item", item);
   return (
     <div>
       <a href={`/album/${id}`} className="group">

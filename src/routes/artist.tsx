@@ -85,8 +85,6 @@ export const Artist = () => {
             modules={[Pagination, Navigation]}
             spaceBetween={10}
             slidesPerView={3}
-            onSlideChange={() => console.log("slide change")}
-            onSwiper={(swiper) => console.log(swiper)}
             navigation={{
               prevEl: ".custom-prev",
               nextEl: ".custom-next",
