@@ -21,7 +21,19 @@
     "noUnusedParameters": true,
     "erasableSyntaxOnly": true,
     "noFallthroughCasesInSwitch": true,
-    "noUncheckedSideEffectImports": true
+    "noUncheckedSideEffectImports": true,
+    "baseUrl": "./",
+    "paths": {
+      "services/*": ["src/services/*"],
+      "@redux/*": ["src/redux/*"],
+      "components/*": ["src/components/*"],
+      "ui/*": ["src/ui/*"],
+      "testing/*": ["src/testing/*"],
+      "hooks/*": ["src/hooks/*"],
+      "assets/*": ["src/assets/*"],
+      "utils/*": ["src/utils/*"],
+      "constants/*": ["src/constants/*"],
+    }
   },
   "include": ["src"]
 }

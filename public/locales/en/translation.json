@@ -1,0 +1,29 @@
+{
+  "Header": {
+    "title": "Meloman",
+    "Search": {
+      "placeholder": "Search...",
+      "Categories": {
+        "artist": "Artists",
+        "album": "Albums",
+        "track": "Tracks"
+      }
+    }
+  },
+  "LastReleases": {
+    "title": "Last releases"
+  },
+  "Album": {
+    "single": "Single",
+    "album": "Album",
+    "release": "Release"
+  },
+  "Artist": {
+    "top_tracks": "Top tracks",
+    "albums": "Albums",
+    "show_more": "Show more"
+  },
+  "ArtistAlbums": {
+    "albums": "Albums"
+  }
+}

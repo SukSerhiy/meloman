@@ -1,0 +1,29 @@
+{
+  "Header": {
+    "title": "Меломан",
+    "Search": {
+      "placeholder": "Шукати...",
+      "Categories": {
+        "artist": "Виконавці",
+        "album": "Альбоми",
+        "track": "Треки"
+      }
+    }
+  },
+  "LastReleases": {
+    "title": "Останні релізи"
+  },
+  "Album": {
+    "single": "Сингл",
+    "album": "Альбом",
+    "release": "Реліз"
+  },
+  "Artist": {
+    "top_tracks": "Топ треки",
+    "albums": "Альбоми",
+    "show_more": "Показати більше"
+  },
+  "ArtistAlbums": {
+    "albums": "Альбоми"
+  }
+}
