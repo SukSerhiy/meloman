@@ -55,7 +55,9 @@ export const SearchInput: FC = () => {
   }, [searchValue, inputFocus, artists, albums, setOpen, category]);
 
   useEffect(() => {
-    dispatch(searchActions.searchByText({ text: debSearchValue, category }));
+    if (debSearchValue && category) {
+      dispatch(searchActions.searchByText({ text: debSearchValue, category }));
+    }
   }, [debSearchValue, category, dispatch]);
 
   return (

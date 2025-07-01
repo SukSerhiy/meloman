@@ -1,5 +1,14 @@
-import { describe, it, vi, expect, beforeAll, afterEach, afterAll } from "vitest";
+import {
+  describe,
+  it,
+  vi,
+  expect,
+  beforeAll,
+  afterEach,
+  afterAll,
+} from "vitest";
 import { render, screen } from "testing/utils";
+import { waitFor } from "@testing-library/react";
 // import userEvent from "@testing-library/user-event";
 import MockedTopLoadingBar from "testing/mocks/reactTopLoadingBarMock";
 // import { createServer } from "testing/server";
@@ -23,14 +32,6 @@ type RequestParams = {
 
 const getLastReleases = (params: RequestParams) => {
   const url = new URL(`${API_HOST}/v1/browse/new-releases`);
-  if (Object.keys(params).length > 0) {
-    Object.keys(params).forEach((key) => {
-      const value = params[key as keyof RequestParams];
-      if (value !== undefined) {
-        url.searchParams.append(key, value.toString());
-      }
-    });
-  }
   const { limit = 1, offset = 0, total } = params;
   return http.get(url.toString(), () => {
     return HttpResponse.json({
@@ -59,22 +60,24 @@ describe("Home", () => {
   it("renders loading bar on load", async () => {
     server.use(getLastReleases({ total: 1 }));
     render(<Home />);
-    expect(screen.getByTestId('loading-bar')).toBeInTheDocument();
+    expect(screen.getByTestId("loading-bar")).toBeInTheDocument();
   });
 
   it("renders with 5 albums", async () => {
     server.use(getLastReleases({ total: 5, limit: 5, offset: 0 }));
 
     render(<Home />);
-    const links = await screen.findAllByRole('link', { name: /album/i });
-
-    expect(links).toHaveLength(5);
+    
+    await waitFor(async () => {
+      const links = await screen.findAllByRole("link", { name: /album/i });
+      expect(links).toHaveLength(5);
+    }, { timeout: 3000 });
   });
 
   it("renders pagination when total is more than limit", async () => {
     server.use(getLastReleases({ total: 10, limit: 5, offset: 0 }));
     render(<Home />);
-    const pagination = await screen.findByTestId('pagination');
+    const pagination = await screen.findByTestId("pagination");
     expect(pagination).toBeInTheDocument();
   });
 
