@@ -1,69 +1,31 @@
-# React + TypeScript + Vite
+# [Meloman :notes: :headphones:](https://meloman1.netlify.app)
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+A simple portfolio for muusic searching.
 
-Currently, two official plugins are available:
+Uses free [Spotify](https://developer.spotify.com/documentation/web-api/) API. This part of API is free so I can not aviod some restrictions such as not all tracks are avaliable for listening and those what are avaliable provides only 30 sec fragment.
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+The following use cases are implemented:
 
-## Expanding the ESLint configuration
+* Get list of last releases
+* Search albums and artists by the key world
+* Open album page with information about album and trak list
+* Open artist page with artist info including top tracks, albums and related artists
 
-If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
+Made using following technologies and libraries: [React](https://ru.reactjs.org/), [Redux](https://redux.js.org/), [axios](https://github.com/axios/axios), [redux-thunk](https://github.com/reduxjs/redux-thunk), [react-testing-library](https://testing-library.com/docs/react-testing-library/intro/), [vitest](https://vitest.dev/)
 
-```js
-export default tseslint.config([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
+## Available Scripts
 
-      // Remove tseslint.configs.recommended and replace with this
-      ...tseslint.configs.recommendedTypeChecked,
-      // Alternatively, use this for stricter rules
-      ...tseslint.configs.strictTypeChecked,
-      // Optionally, add this for stylistic rules
-      ...tseslint.configs.stylisticTypeChecked,
+Following commands are avaliable
 
-      // Other configs...
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
-```
+### `npm run dev`
 
-You can also install [eslint-plugin-react-x](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-dom) for React-specific lint rules:
+Runs the app in the development mode.
+Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
 
-```js
-// eslint.config.js
-import reactX from 'eslint-plugin-react-x'
-import reactDom from 'eslint-plugin-react-dom'
+### `npm run build`
 
-export default tseslint.config([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
-      // Enable lint rules for React
-      reactX.configs['recommended-typescript'],
-      // Enable lint rules for React DOM
-      reactDom.configs.recommended,
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
-```
+Builds the app to the `dist` folder in a production mode.
+
+### `npm run test`
+
+Run tests.
