@@ -55,24 +55,26 @@ export const ArtistAlbums = () => {
   return (
     <HomeLayout>
       {/* Breadcrumbs */}
-      <div className="text-lg mb-2">
+      <div className="mb-2 text-lg">
         <a href={`/artist/${id}`} className="font-bold">
           {name}
         </a>
         <span className="mx-2">&gt;</span>
-        <span className="ml-2">{t('ArtistAlbums.albums')}</span>
+        <span className="ml-2">{t("ArtistAlbums.albums")}</span>
       </div>
       <div className="grid grid-cols-[repeat(auto-fill,minmax(300px,1fr))] gap-4">
         {loading
           ? loadingPlug
           : items.map((item) => <Album key={item.id} item={item} />)}
       </div>
-      <Pagination
-        page={currentPage + 1}
-        perPage={limit}
-        total={total}
-        onPageChange={(page) => setCurrentPage(page - 1)}
-      />
+      <div className="flex justify-center mt-6">
+        <Pagination
+          page={currentPage + 1}
+          perPage={limit}
+          total={total}
+          onPageChange={(page) => setCurrentPage(page - 1)}
+        />
+      </div>
     </HomeLayout>
   );
 };
