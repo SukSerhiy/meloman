@@ -33,7 +33,7 @@ export const Pagination: FC<IPagination> = ({
 
   return (
     <div className="flex gap-2" data-testid="pagination">
-      <button type="button" onClick={handlePrev}>
+      <button type="button" className="cursor-pointer py-1 px-1 rounded-2xl shadow-2xl hover:bg-active" onClick={handlePrev}>
         <ChevronLeft />
       </button>
       {pagesArray.length <= maxToShow ? (
@@ -43,7 +43,7 @@ export const Pagination: FC<IPagination> = ({
             type="button"
             onClick={handlePageChange}
             name={String(_page)}
-            className={`${page === _page ? "text-red-500 font-bold" : ""}`}
+            className={`py-2 px-3 rounded-2xl shadow-2xl cursor-pointer hover:bg-active ${page === _page ? " text-white bg-primary" : ""}`}
           >
             {_page}
           </button>
@@ -85,7 +85,7 @@ export const Pagination: FC<IPagination> = ({
           )}
         </>
       )}
-      <button type="button" data-testid="next-page-btn" onClick={handleNext}>
+      <button type="button" data-testid="next-page-btn" className="cursor-pointer py-1 px-1 rounded-2xl shadow-2xl hover:bg-active" onClick={handleNext}>
         <ChevronRight />
       </button>
     </div>

@@ -48,7 +48,7 @@ export const Home = () => {
           : items.map((item) => <Album key={item.id} item={item} />)}
       </div>
       {!loading && (
-        <div className="flex justify-end">
+        <div className="flex justify-center mt-6">
           <Pagination
             page={currentPage + 1}
             perPage={limit}
